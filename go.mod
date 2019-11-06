@@ -10,5 +10,6 @@ require (
 	github.com/spf13/viper v1.5.0
 	github.com/stretchr/testify v1.4.0
 	golang.org/x/lint v0.0.0-20190409202823-959b441ac422
+	gopkg.in/resty.v1 v1.12.0
 	gopkg.in/yaml.v2 v2.2.5
 )

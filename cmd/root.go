@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"gopkg.in/resty.v1"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
@@ -27,6 +28,11 @@ var rootCmd = &cobra.Command{
 	Long: `A tool for interacting with Healthbot over the REST API.
 	
 The intent with this tool is to provide bulk or aggregate functions, that simplify interacting with Healthbot.`,
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		if cmd.Flag("verbose").Value.String() == "true" {
+			resty.SetDebug(true) // will show rest calls
+		}
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -48,7 +54,15 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.h7t.yaml)")
 
+	rootCmd.PersistentFlags().StringP("authority", "a", "localhost:8080", "healthbot HTTPS Authority")
+	rootCmd.PersistentFlags().StringP("username", "u", "admin", "healthbot Username")
+	rootCmd.PersistentFlags().StringP("password", "p", "****", "healthbot Password")
+	viper.BindPFlag("authority", rootCmd.PersistentFlags().Lookup("authority"))
+	viper.BindPFlag("username", rootCmd.PersistentFlags().Lookup("username"))
+	viper.BindPFlag("password", rootCmd.PersistentFlags().Lookup("password"))
+
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "cause "+rootCmd.Use+" to be more verbose")
+
 }
 
 // initConfig reads in config file and ENV variables if set.
