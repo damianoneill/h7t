@@ -1,5 +1,11 @@
 # Contributing to h7t
 
+## Setup
+
+Assuming you have a go setup on your host, run make, which will trigger a download of the tools required to write code in the repo.
+
+## Command Structure
+
 In h7t commands represent actions/verbs, args are things/nouns/objects and Flags are modifiers/adjective (property/state) for actions.
 
 For example:
@@ -12,13 +18,14 @@ For example:
 
 If adding new commands, understand how they will fit into the bigger picture by reviewing below.
 
-## Actions
+### Actions
 
 The following are the list of actions supported / planned for h7t
 
-- provision
+- extract
+- transform
+- load
 - summarize
-- replicate
 
 ## Things
 
@@ -30,11 +37,11 @@ The following are the list objects supported / planned by h7t
 - playbook-instances
 - installation
 
-## States
+### States
 
 The following are the list of properties supported / planned by h7t
 
-### Common
+#### Common
 
 - verbose (v)
 - config
@@ -43,11 +50,11 @@ The following are the list of properties supported / planned by h7t
 - username (u)
 - password (p)
 
-### Action specific
+#### Action specific
 
 - N/A
 
-### Thing specific
+#### Thing specific
 
 - directory (d)
 - erase (e)

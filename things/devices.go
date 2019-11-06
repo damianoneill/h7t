@@ -5,12 +5,15 @@ type Devices struct {
 	Device []Device `json:"device"`
 }
 
+// Password - wrapper for uname/password
+type Password struct {
+	Password *string `json:"password"`
+	Username *string `json:"username"`
+}
+
 // Authentication - Collection type for Auth options
 type Authentication struct {
-	Password struct {
-		Password *string `json:"password"`
-		Username *string `json:"username"`
-	} `json:"password,omitempty" yaml:"password,omitempty"`
+	Password Password `json:"password,omitempty" yaml:"password,omitempty"`
 }
 
 // IAgent - configure the NETCONF port
