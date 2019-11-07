@@ -10,7 +10,7 @@ A command line tool for interacting with [Juniper Healthbot](https://www.juniper
 
 A tool for interacting with Healthbot over the REST API.
 
-The initial focus of this tool is to provide bulk or aggregate functions, that simplify interacting with Healthbot.
+The initial focus of this tool is to provide bulk or aggregate functions, that simplify interacting with Healthbot. The initial use case is Extract Transform and Load (ETL) based.
 
 ## Commands
 
@@ -32,3 +32,7 @@ h7t
 ```
 
 A full list of the commands and their options is described in the [docs](./docs/h7t.md).
+
+## Transforms
+
+The tool includes a plugin based solution for transforming customer data into a format that can be consumed. Further information is available in the [plugins](./plugins/README.md) directory.

@@ -4,7 +4,20 @@ before:
     - go mod tidy
     - go fmt ./...
 builds:
-  - env:
+  - id: "h7t"
+    main: ./main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+  - id: "plugin-delimited"
+    main: ./plugins/delimited/main.go
+    binary: /plugins/delimited/transformer
+    env:
       - CGO_ENABLED=0
     goos:
       - linux

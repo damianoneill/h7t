@@ -60,3 +60,4 @@ The following are the list of properties supported / planned by h7t
 - output_directory (o)
 - input_directory (i)
 - erase (e)
+- plugin

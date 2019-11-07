@@ -11,8 +11,8 @@ import (
 	"gopkg.in/resty.v1"
 )
 
-// devicesCmd represents the devices command
-var devicesCmd = &cobra.Command{
+// loadDevicesCmd represents the devices command
+var loadDevicesCmd = &cobra.Command{
 	Use:   "devices",
 	Short: "Load Device configuration",
 	Long:  `Load into a Healthbot installation the configuration for the Devices.`,
@@ -51,5 +51,5 @@ var devicesCmd = &cobra.Command{
 }
 
 func init() {
-	loadCmd.AddCommand(devicesCmd)
+	loadCmd.AddCommand(loadDevicesCmd)
 }
