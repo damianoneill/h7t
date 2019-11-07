@@ -2,12 +2,13 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/damianoneill/h7t/dsl"
-	"github.com/spf13/cobra"
-	"gopkg.in/resty.v1"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/damianoneill/h7t/dsl"
+	"github.com/spf13/cobra"
+	"gopkg.in/resty.v1"
 )
 
 // devicesCmd represents the devices command
@@ -28,10 +29,11 @@ var devicesCmd = &cobra.Command{
 				return
 			}
 
-			err = dsl.PostThingToResource(resty.DefaultClient, &devices, ci)
+			err = dsl.PostThingToResource(resty.DefaultClient, &devices, ci, true)
 			if err != nil {
 				return
 			}
+
 			fmt.Fprintf(os.Stdout, "Loaded %v Devices from %v to %v \n", len(devices.Device), filename, ci.Authority)
 		}
 		return

@@ -64,7 +64,7 @@ func ExtractThingFromResource(rc *resty.Client, thing Thing, ci ConnectionInfo) 
 }
 
 // PostThingToResource - Use the Things Path function to build a POST REST requests and marshal body
-func PostThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo) (err error) {
+func PostThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, shouldCommit bool) (err error) {
 	resp, err := rc.R().
 		SetBasicAuth(ci.Username, ci.Password).
 		SetBody(thing).
@@ -74,8 +74,18 @@ func PostThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo) (err 
 	}
 	switch resp.StatusCode() {
 	case 200:
-		return
+		break
 	default:
 		return errors.New("Problem updating Devices: %v " + resp.String())
 	}
+	if shouldCommit {
+		_, err = rc.R().
+			SetBasicAuth(ci.Username, ci.Password).
+			SetBody(thing).
+			Post("https://" + ci.Authority + "/api/v1/configuration/")
+		if err != nil {
+			return
+		}
+	}
+	return
 }

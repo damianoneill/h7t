@@ -26,11 +26,13 @@ The following are the list of actions supported / planned for h7t
 - transform
 - load
 - summarize
+- configure
 
 ## Things
 
-The following are the list objects supported / planned by h7t
+The following are the list objects supported / planned by h7t, this includes Healthbot DSL objects + others
 
+- device
 - devices
 - device-groups
 - helper-files

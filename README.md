@@ -1,6 +1,8 @@
 # h~~ealthbot~~<sup>7</sup>t
 
 [![GitHub release](https://img.shields.io/github/v/release/damianoneill/h7t.svg)](https://GitHub.com/damianoneill/h7t/releases/)
+[![Go Report Card](https://goreportcard.com/badge/damianoneill/h7t)](http://goreportcard.com/report/damianoneill/h7t)
+[![license](https://img.shields.io/github/license/damianoneill/h7t.svg)](https://github.com/damianoneill/h7t/blob/master/LICENSE)
 
 A command line tool for interacting with [Juniper Healthbot](https://www.juniper.net/us/en/products-services/sdn/contrail/contrail-healthbot/).
 

@@ -4,7 +4,7 @@ Load information into a Healthbot Installation
 
 ### Synopsis
 
-Load things into Healthbot for e.g. Devices, Device Groups, etc..
+Load dsl into Healthbot for e.g. Devices, Device Groups, etc..
 
 ```
 h7t load [flags]

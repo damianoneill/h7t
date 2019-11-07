@@ -4,7 +4,7 @@ Extract information from a Healthbot Installation
 
 ### Synopsis
 
-Extract things from Healthbot for e.g. Devices, Device Groups, etc.
+Extract dsl from Healthbot for e.g. Devices, Device Groups, etc.
 
 ```
 h7t extract [flags]

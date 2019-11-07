@@ -188,9 +188,10 @@ func TestPostThingToResource(t *testing.T) {
 		httpmock.NewStringResponder(200, ``))
 
 	type args struct {
-		rc    *resty.Client
-		thing Thing
-		ci    ConnectionInfo
+		rc           *resty.Client
+		thing        Thing
+		ci           ConnectionInfo
+		shouldCommit bool
 	}
 	tests := []struct {
 		name    string
@@ -201,7 +202,7 @@ func TestPostThingToResource(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := PostThingToResource(tt.args.rc, tt.args.thing, tt.args.ci); (err != nil) != tt.wantErr {
+			if err := PostThingToResource(tt.args.rc, tt.args.thing, tt.args.ci, tt.args.shouldCommit); (err != nil) != tt.wantErr {
 				t.Errorf("PostThingToResource() error = %v, wantErr %v", err, tt.wantErr)
 				assert.Len(t, httpmock.GetTotalCallCount(), 1, "Expected Single call to Resource")
 
