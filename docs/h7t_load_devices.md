@@ -21,6 +21,7 @@ h7t load devices [flags]
 ```
   -a, --authority string         healthbot HTTPS Authority (default "localhost:8080")
       --config string            config file (default is $HOME/.h7t.yaml)
+  -e, --erase                    erase the thing(s) identified in configuration
   -i, --input_directory string   directory where the configuration will be loaded from (default ".")
   -p, --password string          healthbot Password (default "****")
   -u, --username string          healthbot Username (default "admin")

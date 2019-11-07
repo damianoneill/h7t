@@ -13,6 +13,7 @@ h7t load [flags]
 ### Options
 
 ```
+  -e, --erase                    erase the thing(s) identified in configuration
   -h, --help                     help for load
   -i, --input_directory string   directory where the configuration will be loaded from (default ".")
 ```
