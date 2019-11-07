@@ -35,4 +35,4 @@ A full list of the commands and their options is described in the [docs](./docs/
 
 ## Transforms
 
-The tool includes a plugin based solution for transforming customer data into a format that can be consumed. Further information is available in the [plugins](./plugins/README.md) directory.
+The tool includes a plugin based solution for transforming customer data into a format that can be consumed. Further information is available in the [plugins](./plugins/) directory.
