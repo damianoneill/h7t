@@ -74,3 +74,13 @@ func (d *Devices) Unmarshal(data []byte) error {
 func (d *Devices) Path() string {
 	return "/api/v1/devices/"
 }
+
+// Unmarshal - tries to Unmarshal yaml first, then json into the Device struct
+func (d *Device) Unmarshal(data []byte) error {
+	return unmarshal(data, d)
+}
+
+// Path - resource path for Device
+func (d *Device) Path() string {
+	return "/api/v1/device/" + d.DeviceID + "/"
+}

@@ -212,3 +212,38 @@ func TestPostThingToResource(t *testing.T) {
 		})
 	}
 }
+
+func TestDeleteThingToResource(t *testing.T) {
+
+	// Get the underlying HTTP Client and set it to Mock
+	httpmock.ActivateNonDefault(client.GetClient())
+	defer httpmock.DeactivateAndReset()
+
+	httpmock.RegisterResponder("DELETE", "https://localhost:8080/api/v1/device/test-device/",
+		httpmock.NewStringResponder(204, ``))
+
+	type args struct {
+		rc           *resty.Client
+		thing        Thing
+		ci           ConnectionInfo
+		shouldCommit bool
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{"valid delete thing to resource", args{rc: client, thing: &fakeDevices.Device[0], ci: ci}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := DeleteThingToResource(tt.args.rc, tt.args.thing, tt.args.ci, tt.args.shouldCommit); (err != nil) != tt.wantErr {
+				t.Errorf("DeleteThingToResource() error = %v, wantErr %v", err, tt.wantErr)
+				assert.Len(t, httpmock.GetTotalCallCount(), 1, "Expected Single call to Resource")
+
+				_, isPresent := httpmock.GetCallCountInfo()["DELETE https://localhost:8080/api/v1/devices/test-device/"]
+				assert.True(t, isPresent, "Should contain a correctly formatted POST")
+			}
+		})
+	}
+}

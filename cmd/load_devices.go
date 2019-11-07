@@ -18,6 +18,7 @@ var devicesCmd = &cobra.Command{
 	Long:  `Load into a Healthbot installation the configuration for the Devices.`,
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
 		inputDirectory := cmd.Flag("input_directory").Value.String()
+		shouldErase := cmd.Flag("erase").Value.String()
 		files, err := filepath.Glob(inputDirectory + filePathSeperator + "*")
 		if err != nil {
 			return
@@ -29,12 +30,21 @@ var devicesCmd = &cobra.Command{
 				return
 			}
 
-			err = dsl.PostThingToResource(resty.DefaultClient, &devices, ci, true)
-			if err != nil {
-				return
+			if shouldErase == "true" {
+				for _, device := range devices.Device {
+					err = dsl.DeleteThingToResource(resty.DefaultClient, &device, ci, true)
+					if err != nil {
+						return
+					}
+				}
+			} else {
+				err = dsl.PostThingToResource(resty.DefaultClient, &devices, ci, true)
+				if err != nil {
+					return
+				}
 			}
 
-			fmt.Fprintf(os.Stdout, "Loaded %v Devices from %v to %v \n", len(devices.Device), filename, ci.Authority)
+			fmt.Fprintf(os.Stdout, "Updated %v Devices from %v to %v \n", len(devices.Device), filename, ci.Authority)
 		}
 		return
 	},

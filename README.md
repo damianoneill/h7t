@@ -12,7 +12,7 @@ A tool for interacting with Healthbot over the REST API.
 
 The initial focus of this tool is to provide bulk or aggregate functions, that simplify interacting with Healthbot.
 
-## Options
+## Commands
 
 ```console
 h7t
@@ -31,4 +31,4 @@ h7t
     └── devices
 ```
 
-A full list of the commands / options available with the tool is described in the [docs](./docs/h7t.md).
+A full list of the commands and their options is described in the [docs](./docs/h7t.md).

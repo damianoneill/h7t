@@ -76,7 +76,33 @@ func PostThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, shoul
 	case 200:
 		break
 	default:
-		return errors.New("Problem updating Devices: %v " + resp.String())
+		return errors.New("Problem updating Thing: %v " + resp.String())
+	}
+	if shouldCommit {
+		_, err = rc.R().
+			SetBasicAuth(ci.Username, ci.Password).
+			SetBody(thing).
+			Post("https://" + ci.Authority + "/api/v1/configuration/")
+		if err != nil {
+			return
+		}
+	}
+	return
+}
+
+// DeleteThingToResource - Use the Things Path function to build a DELETE REST request
+func DeleteThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, shouldCommit bool) (err error) {
+	resp, err := rc.R().
+		SetBasicAuth(ci.Username, ci.Password).
+		Delete("https://" + ci.Authority + thing.Path())
+	if err != nil {
+		return
+	}
+	switch resp.StatusCode() {
+	case 204:
+		break
+	default:
+		return errors.New("Problem deleting Thing: %v " + resp.String())
 	}
 	if shouldCommit {
 		_, err = rc.R().

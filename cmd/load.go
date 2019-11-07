@@ -17,5 +17,5 @@ var loadCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(loadCmd)
 	loadCmd.PersistentFlags().StringP("input_directory", "i", ".", "directory where the configuration will be loaded from")
-
+	loadCmd.PersistentFlags().BoolP("erase", "e", false, "erase the thing(s) identified in configuration")
 }
