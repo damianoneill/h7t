@@ -25,18 +25,17 @@ The following are the list of actions supported / planned for h7t
 - extract
 - transform
 - load
-- summarize
+- summarise
 - configure
 
 ## Things
 
-The following are the list objects supported / planned by h7t, this includes Healthbot DSL objects + others
+The following are the list objects supported / planned by h7t, this includes Healthbot DSL objects + others for e.g. Junos Devices
 
 - device
 - devices
 - device-groups
 - helper-files
-- playbook-instances
 - installation
 
 ### States

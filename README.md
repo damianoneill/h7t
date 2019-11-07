@@ -14,4 +14,21 @@ The initial focus of this tool is to provide bulk or aggregate functions, that s
 
 ## Options
 
+```console
+h7t
+├── configure
+│   └── devices
+├── extract
+│   ├── device-groups
+│   └── devices
+├── load
+│   ├── device-groups
+│   ├── devices
+│   └── helper-files
+├── summarise
+│   └── installation
+└── transform
+    └── devices
+```
+
 A full list of the commands / options available with the tool is described in the [docs](./docs/h7t.md).
