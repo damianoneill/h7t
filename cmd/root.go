@@ -1,13 +1,16 @@
 package cmd
 
 import (
+	"crypto/tls"
 	"fmt"
 	"os"
+	"path/filepath"
 
+	"github.com/damianoneill/h7t/dsl"
 	"github.com/spf13/cobra"
 	"gopkg.in/resty.v1"
 
-	homedir "github.com/mitchellh/go-homedir"
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 )
 
@@ -19,7 +22,11 @@ type buildInfo struct {
 
 var bi buildInfo
 
+var ci dsl.ConnectionInfo
+
 var cfgFile string
+
+var filePathSeperator = string(filepath.Separator)
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -32,7 +39,17 @@ The intent with this tool is to provide bulk or aggregate functions, that simpli
 		if cmd.Flag("verbose").Value.String() == "true" {
 			resty.SetDebug(true) // will show rest calls
 		}
+		ci = dsl.ConnectionInfo{
+			Authority: viper.GetString("authority"),
+			Username:  viper.GetString("username"),
+			Password:  viper.GetString("password"),
+		}
+		//setup resty
+		resty.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
+		viper.Set("restclient.RedirectPolicy", "always")
 	},
+	SilenceUsage:  true,
+	SilenceErrors: true,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -57,9 +74,9 @@ func init() {
 	rootCmd.PersistentFlags().StringP("authority", "a", "localhost:8080", "healthbot HTTPS Authority")
 	rootCmd.PersistentFlags().StringP("username", "u", "admin", "healthbot Username")
 	rootCmd.PersistentFlags().StringP("password", "p", "****", "healthbot Password")
-	viper.BindPFlag("authority", rootCmd.PersistentFlags().Lookup("authority"))
-	viper.BindPFlag("username", rootCmd.PersistentFlags().Lookup("username"))
-	viper.BindPFlag("password", rootCmd.PersistentFlags().Lookup("password"))
+	_ = viper.BindPFlag("authority", rootCmd.PersistentFlags().Lookup("authority"))
+	_ = viper.BindPFlag("username", rootCmd.PersistentFlags().Lookup("username"))
+	_ = viper.BindPFlag("password", rootCmd.PersistentFlags().Lookup("password"))
 
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "cause "+rootCmd.Use+" to be more verbose")
 

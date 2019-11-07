@@ -1,4 +1,4 @@
-package things
+package dsl
 
 // Devices - collection of Device
 type Devices struct {
@@ -70,7 +70,7 @@ func (d *Devices) Unmarshal(data []byte) error {
 	return unmarshal(data, d)
 }
 
-// Unmarshal - tries to Unmarshal yaml first, then json into the Device struct
-func (d *Device) Unmarshal(data []byte) error {
-	return unmarshal(data, d)
+// Path - resource path for Devices
+func (d *Devices) Path() string {
+	return "/api/v1/devices/"
 }
