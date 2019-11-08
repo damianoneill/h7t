@@ -7,25 +7,24 @@ import (
 	"github.com/hashicorp/go-plugin"
 )
 
+// Arguments - composite for pass data across net/rpc
+type Arguments struct {
+	InputDirectory string
+	CmdLineArgs []string
+}
+
 // Transformer is the interface that we're exposing as a plugin.
 type Transformer interface {
-	Devices(args []string) (dsl.Devices, error)
+	Devices(args Arguments) (dsl.Devices, error)
 }
 
 // TransformerRPC - an implementation that talks over RPC
 type TransformerRPC struct{ client *rpc.Client }
 
 // Devices - interface implementation
-func (g *TransformerRPC) Devices(args []string) dsl.Devices {
-	var resp dsl.Devices
-	err := g.client.Call("Plugin.Devices", args, &resp)
-	if err != nil {
-		// You usually want your interfaces to return errors. If they don't,
-		// there isn't much other choice here.
-		panic(err)
-	}
-
-	return resp
+func (g *TransformerRPC) Devices(args Arguments) (resp dsl.Devices, err error) {
+	err = g.client.Call("Plugin.Devices",args , &resp)
+	return
 }
 
 // TransformerRPCServer - is the RPC server that TransformerRPC talks to, conforming to
@@ -35,7 +34,7 @@ type TransformerRPCServer struct {
 }
 
 // Devices - Server implementation
-func (s *TransformerRPCServer) Devices(args []string, resp *dsl.Devices) (err error) {
+func (s *TransformerRPCServer) Devices(args Arguments, resp *dsl.Devices) (err error) {
 	*resp, err = s.Impl.Devices(args)
 	return
 }

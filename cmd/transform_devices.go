@@ -31,7 +31,7 @@ var tranformDevicesCmd = &cobra.Command{
 	Short: "Transform Devices configuration",
 	Long:  `Transform Devices configurations from a proprietary format into the dsl format using a bundled plugin.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// inputDirectory := cmd.Flag("input_directory").Value.String()
+		inputDirectory := cmd.Flag("input_directory").Value.String()
 		// outputDirectory := cmd.Flag("output_directory").Value.String()
 		p := cmd.Flag("plugin").Value.String()
 		fmt.Fprintf(os.Stdout, "Plugin: %v \n", p)
@@ -66,7 +66,10 @@ var tranformDevicesCmd = &cobra.Command{
 
 		transformer := raw.(plugins.Transformer)
 
-		devices, err := transformer.Devices(args)
+		devices, err := transformer.Devices(plugins.Arguments{
+			InputDirectory: inputDirectory,
+			CmdLineArgs:    args,
+		})
 		if err != nil {
 			fmt.Fprintf(os.Stdout, "Error: %v \n", err)
 			return

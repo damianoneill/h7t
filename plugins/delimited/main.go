@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-
+	"errors"
 	"github.com/damianoneill/h7t/dsl"
 	"github.com/damianoneill/h7t/plugins"
 	"github.com/hashicorp/go-hclog"
@@ -15,8 +15,12 @@ type DelimitedDevices struct {
 }
 
 // Devices - returns a list of dsl Devices
-func (g *DelimitedDevices) Devices(args []string) (devices dsl.Devices, err error) {
-	g.logger.Debug("message from DelimitedDevices.Devices")
+func (g *DelimitedDevices) Devices(args plugins.Arguments) (devices dsl.Devices, err error) {
+	g.logger.Debug("args:", "inputDirectory", args.InputDirectory)
+	g.logger.Debug("args:", "command line arguments", args.CmdLineArgs)
+	if len(args.CmdLineArgs) != 1 {
+		err = errors.New("delimited plugin requires regex in quotes \" \" as first argument")
+	}
 	devices = dsl.Devices{
 		Device: []dsl.Device{dsl.Device{DeviceID: "10.0.0.1"}},
 	}
@@ -44,8 +48,6 @@ func main() {
 	var pluginMap = map[string]plugin.Plugin{
 		"transformer": &plugins.TransformerPlugin{Impl: transformer},
 	}
-
-	logger.Debug("message from plugin", "foo", "bar")
 
 	plugin.Serve(&plugin.ServeConfig{
 		HandshakeConfig: handshakeConfig,
