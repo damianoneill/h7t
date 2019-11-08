@@ -65,7 +65,13 @@ var tranformDevicesCmd = &cobra.Command{
 		}
 
 		transformer := raw.(plugins.Transformer)
-		fmt.Fprintf(os.Stdout, "Devices: %v \n", transformer.Devices(args))
+
+		devices, err := transformer.Devices(args)
+		if err != nil {
+			fmt.Fprintf(os.Stdout, "Error: %v \n", err)
+			return
+		}
+		fmt.Fprintf(os.Stdout, "Devices: %v \n", devices)
 	},
 }
 

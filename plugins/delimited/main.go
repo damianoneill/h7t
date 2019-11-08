@@ -15,11 +15,12 @@ type DelimitedDevices struct {
 }
 
 // Devices - returns a list of dsl Devices
-func (g *DelimitedDevices) Devices(args []string) dsl.Devices {
+func (g *DelimitedDevices) Devices(args []string) (devices dsl.Devices, err error) {
 	g.logger.Debug("message from DelimitedDevices.Devices")
-	return dsl.Devices{
+	devices = dsl.Devices{
 		Device: []dsl.Device{dsl.Device{DeviceID: "10.0.0.1"}},
 	}
+	return
 }
 
 var handshakeConfig = plugin.HandshakeConfig{
