@@ -1,6 +1,3 @@
-GOCMD=go
-GOINSTALL=$(GOCMD) install
-
 all: commit
 commit: 
 	 golangci-lint run
@@ -8,6 +5,9 @@ commit:
 	 go mod tidy
 	 go install && h7t docs
 tools: download
-	cat tools.go | grep _ | awk -F'"' '{print $$2'} | xargs -tI % $(GOINSTALL) %
+	cat tools.go | grep _ | awk -F'"' '{print $$2'} | xargs -tI % go install %
 download:
-	$(GOCMD) mod download
+	 go mod download
+build:
+	go install
+	go build -o ./plugins/delimited/transformer ./plugins/delimited/main.go
