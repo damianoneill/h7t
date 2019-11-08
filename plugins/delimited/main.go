@@ -1,8 +1,10 @@
 package main
 
 import (
-	"os"
 	"errors"
+	"os"
+	"regexp"
+
 	"github.com/damianoneill/h7t/dsl"
 	"github.com/damianoneill/h7t/plugins"
 	"github.com/hashicorp/go-hclog"
@@ -21,6 +23,8 @@ func (g *DelimitedDevices) Devices(args plugins.Arguments) (devices dsl.Devices,
 	if len(args.CmdLineArgs) != 1 {
 		err = errors.New("delimited plugin requires regex in quotes \" \" as first argument")
 	}
+	delimiter := regexp.MustCompile(args.CmdLineArgs[0])
+	g.logger.Info("delimiter", "split", delimiter.Split("banana   split", -1))
 	devices = dsl.Devices{
 		Device: []dsl.Device{dsl.Device{DeviceID: "10.0.0.1"}},
 	}
