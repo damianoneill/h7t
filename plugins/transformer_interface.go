@@ -16,9 +16,9 @@ type Transformer interface {
 type TransformerRPC struct{ client *rpc.Client }
 
 // Devices - interface implementation
-func (g *TransformerRPC) Devices() dsl.Devices {
+func (g *TransformerRPC) Devices(args []string) dsl.Devices {
 	var resp dsl.Devices
-	err := g.client.Call("Plugin.Devices", new(interface{}), &resp)
+	err := g.client.Call("Plugin.Devices", args, &resp)
 	if err != nil {
 		// You usually want your interfaces to return errors. If they don't,
 		// there isn't much other choice here.
