@@ -9,7 +9,7 @@ import (
 
 // Transformer is the interface that we're exposing as a plugin.
 type Transformer interface {
-	Devices() dsl.Devices
+	Devices(args []string) dsl.Devices
 }
 
 // TransformerRPC - an implementation that talks over RPC
@@ -35,8 +35,8 @@ type TransformerRPCServer struct {
 }
 
 // Devices - Server implementation
-func (s *TransformerRPCServer) Devices(args interface{}, resp *dsl.Devices) error {
-	*resp = s.Impl.Devices()
+func (s *TransformerRPCServer) Devices(args []string, resp *dsl.Devices) error {
+	*resp = s.Impl.Devices(args)
 	return nil
 }
 

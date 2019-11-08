@@ -65,7 +65,7 @@ var tranformDevicesCmd = &cobra.Command{
 		}
 
 		transformer := raw.(plugins.Transformer)
-		fmt.Fprintf(os.Stdout, "Devices: %v \n", transformer.Devices())
+		fmt.Fprintf(os.Stdout, "Devices: %v \n", transformer.Devices(args))
 	},
 }
 
