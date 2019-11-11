@@ -26,5 +26,5 @@ func init() {
 	rootCmd.AddCommand(transformCmd)
 	transformCmd.PersistentFlags().StringP("output_directory", "o", ".", "directory where the configuration will be written to")
 	transformCmd.PersistentFlags().StringP("input_directory", "i", ".", "directory where the configuration will be loaded from")
-	transformCmd.PersistentFlags().String("plugin", "delimited", "name of the plugin to be used")
+	transformCmd.PersistentFlags().String("plugin", "csv", "name of the plugin to be used")
 }

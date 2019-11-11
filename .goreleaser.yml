@@ -14,9 +14,9 @@ builds:
       - windows
     goarch:
       - amd64
-  - id: "plugin-delimited"
-    main: ./plugins/delimited/main.go
-    binary: /plugins/delimited/transformer
+  - id: "plugin-csv"
+    main: ./plugins/csv/main.go
+    binary: /plugins/csv/transformer
     env:
       - CGO_ENABLED=0
     goos:

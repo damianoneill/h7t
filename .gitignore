@@ -17,4 +17,4 @@
 dist
 h7t
 .idea
-/plugins/delimited/transformer
+/plugins/csv/transformer

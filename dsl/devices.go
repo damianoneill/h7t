@@ -7,13 +7,13 @@ type Devices struct {
 
 // Password - wrapper for uname/password
 type Password struct {
-	Password *string `json:"password"`
-	Username *string `json:"username"`
+	Username *string `json:"username" csv:"username,omitempty"`
+	Password *string `json:"password" csv:"password,omitempty"`
 }
 
 // Authentication - Collection type for Auth options
 type Authentication struct {
-	Password Password `json:"password,omitempty" yaml:"password,omitempty"`
+	Password `json:"password,omitempty" yaml:"password,omitempty"`
 }
 
 // IAgent - configure the NETCONF port
@@ -33,8 +33,8 @@ type V2 struct {
 
 // Snmp - configure the SNMP port or Community String
 type Snmp struct {
-	Port int `json:"port,omitempty" yaml:"port,omitempty"`
 	V2   *V2 `json:"v2,omitempty" yaml:"v2,omitempty"`
+	Port int `json:"port,omitempty" yaml:"port,omitempty"`
 }
 
 // Juniper - option to define the Operating system
@@ -55,14 +55,14 @@ type Vendor struct {
 
 // Device - info needed to Register a Device in Healthbot
 type Device struct {
-	DeviceID       string          `json:"device-id" yaml:"device-id"`
-	Host           string          `json:"host"`
-	SystemID       string          `json:"system-id,omitempty" yaml:"system-id,omitempty"`
-	Authentication *Authentication `json:"authentication,omitempty" yaml:"authentication,omitempty"`
-	IAgent         *IAgent         `json:"iAgent,omitempty" yaml:"iAgent,omitempty"`
-	OpenConfig     *OpenConfig     `json:"open-config,omitempty" yaml:"open-config,omitempty"`
-	Snmp           *Snmp           `json:"snmp,omitempty" yaml:"snmp,omitempty"`
-	Vendor         *Vendor         `json:"vendor,omitempty" yaml:"vendor,omitempty"`
+	DeviceID        string  `json:"device-id" yaml:"device-id" csv:"device-id"`
+	Host            string  `json:"host" csv:"host"`
+	SystemID        *string `json:"system-id,omitempty" yaml:"system-id,omitempty" csv:"-"`
+	*Authentication `json:"authentication,omitempty" yaml:"authentication,omitempty"`
+	IAgent          *IAgent     `json:"iAgent,omitempty" yaml:"iAgent,omitempty" csv:"-"`
+	OpenConfig      *OpenConfig `json:"open-config,omitempty" yaml:"open-config,omitempty" csv:"-"`
+	Snmp            *Snmp       `json:"snmp,omitempty" yaml:"snmp,omitempty" csv:"-"`
+	Vendor          *Vendor     `json:"vendor,omitempty" yaml:"vendor,omitempty" csv:"-"`
 }
 
 // Unmarshal - tries to Unmarshal yaml first, then json into the Devices struct

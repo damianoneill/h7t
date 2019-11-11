@@ -8,35 +8,15 @@ The plugin technology is based on hashicorp [go-plugin](https://github.com/hashi
 
 The solution ships with a sample plugin for devices that transforms files containing records that are delimited by a definable character set for e.g. comma's, tab's, etc.
 
-## Delimited Transform
+## CSV Transform
 
-The sample plugin provides a generic solution for mapping delimited files into the Device dsl required by Healthbot.
+The sample plugin provides a transform for mapping CSV files into the Device dsl required by Healthbot.
 
-The plugin takes as its first argument a regex for the delimiter e.g. 
+The plugin expects to parse CSV files in the following format:
 
-```console
-h7t transform devices --plugin delimited '[ ]{1,}'
-```
-
-This regex will split records into fields that are delimited on one or more spaces.  For additional regex [examples](https://yourbasic.org/golang/regexp-cheat-sheet/). 
-
-Additional arguments are required to instruct the plugin on how to map columns in the delimited file into fields in the Devices dsl. 
-JSON filter notation from [jq](https://stedolan.github.io/jq/) is used to define this mapping. 
-As an example, this [jq playground snippet](https://jqplay.org/s/NcDU2mcijx) shows an example of defining a filter to label the password used for NETCONF authentication. 
-
-> Devices dsl contains json keys that include hypens, jq requires any filters on special characters to be wrapped in "", for e.g. on the playground to get the device-id you would need to use ."device-id", for our purposes we will ignore this requirement. 
-
-```console
-h7t transform devices --plugin delimited '[ ]{1,}' '1:.host' '2:.device-id' '5:.authentication.password.username' '6:.authentication.password.password'
-```
-
-As you can guess, the number indicates the column and the jq filter indicates the content
-
-An example of a compatible file would look like below, note the Site and Rack columns are ignored
-
-```console
-10.0.0.1   pe1   "Site a"   "Rack 1"   root   changeme
-10.0.0.2   pe2   "Site a"   "Rack 2"   root   changeme
-10.0.0.3   pe3   "Site a"   "Rack 2"   root   changeme
-10.0.0.4   pe4   "Site a"   "Rack 3"   root   changeme
+```csv
+device-id,host,username,password
+mx1,10.0.0.1,root,changeme
+mx2,10.0.0.2,root,"changeme now"
+mx3,10.0.0.3,,
 ```

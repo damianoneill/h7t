@@ -9,6 +9,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/jszwec/csvutil"
+
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/resty.v1"
@@ -49,6 +51,23 @@ func HelperLoadBytes(tb testing.TB, name string) []byte {
 		tb.Fatal(err)
 	}
 	return bytes
+}
+
+func TestCsvMarshalUnMarshal(t *testing.T) {
+	b, err := csvutil.Marshal(fakeDevices.Device)
+	assert.Nil(t, err, "Failed to marshal csv representation of Devices")
+	assert.Equal(t, "device-id,host,username,password\ntest-device,10.0.0.1,,\n", string(b), "Should only contain device id, host, uname and password")
+	var d []Device
+	err = csvutil.Unmarshal([]byte("device-id,host,username,password\ntest-device,10.0.0.1,,\n"), &d)
+	assert.Nil(t, err, "Failed to unmarshal csv representation of Devices")
+	assert.Nil(t, d[0].SystemID, "System ID should be nil")
+	assert.Nil(t, d[0].IAgent, "IAgent should be nil")
+	assert.Equal(t, "test-device", d[0].DeviceID, "Should only contain device id, host, uname and password")
+
+	w := &bytes.Buffer{}
+	_ = WriteThingToFile(&fakeDevices, w)
+	assert.NotContains(t, w.String(), "password", "should not contain password")
+
 }
 
 func TestUnmarshalFailure(t *testing.T) {

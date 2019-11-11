@@ -10,4 +10,4 @@ download:
 	 go mod download
 build:
 	go install
-	go build -o ./plugins/delimited/transformer ./plugins/delimited/main.go
+	go build -o ./plugins/csv/transformer ./plugins/csv/main.go

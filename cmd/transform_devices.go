@@ -6,6 +6,8 @@ import (
 	"os"
 	"os/exec"
 
+	"github.com/ghodss/yaml"
+
 	"github.com/damianoneill/h7t/plugins"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
@@ -17,7 +19,7 @@ import (
 var handshakeConfig = plugin.HandshakeConfig{
 	ProtocolVersion:  1,
 	MagicCookieKey:   "BASIC_PLUGIN",
-	MagicCookieValue: "delimited",
+	MagicCookieValue: "csv",
 }
 
 // pluginMap is the map of plugins we can dispense.
@@ -47,7 +49,7 @@ var tranformDevicesCmd = &cobra.Command{
 		client := plugin.NewClient(&plugin.ClientConfig{
 			HandshakeConfig: handshakeConfig,
 			Plugins:         pluginMap,
-			Cmd:             exec.Command("./plugins/delimited/transformer"),
+			Cmd:             exec.Command("./plugins/csv/transformer"),
 			Logger:          logger,
 		})
 		defer client.Kill()
@@ -74,7 +76,8 @@ var tranformDevicesCmd = &cobra.Command{
 			fmt.Fprintf(os.Stdout, "Error: %v \n", err)
 			return
 		}
-		fmt.Fprintf(os.Stdout, "Devices: %v \n", devices)
+		b, _ := yaml.Marshal(devices)
+		fmt.Fprintf(os.Stdout, "Devices: %v \n", string(b))
 	},
 }
 
