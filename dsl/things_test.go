@@ -206,6 +206,9 @@ func TestPostThingToResource(t *testing.T) {
 	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/devices/",
 		httpmock.NewStringResponder(200, ``))
 
+	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/configuration/",
+		httpmock.NewStringResponder(200, ``))
+
 	type args struct {
 		rc           *resty.Client
 		thing        Thing
@@ -217,16 +220,25 @@ func TestPostThingToResource(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		{"valid post thing to resource", args{rc: client, thing: &fakeDevices, ci: ci}, false},
+		{"valid post thing to resource, no commit", args{rc: client, thing: &fakeDevices, ci: ci, shouldCommit: false}, false},
+		{"valid post thing to resource and commit", args{rc: client, thing: &fakeDevices, ci: ci, shouldCommit: true}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := PostThingToResource(tt.args.rc, tt.args.thing, tt.args.ci, tt.args.shouldCommit); (err != nil) != tt.wantErr {
 				t.Errorf("PostThingToResource() error = %v, wantErr %v", err, tt.wantErr)
-				assert.Len(t, httpmock.GetTotalCallCount(), 1, "Expected Single call to Resource")
+
+				if !tt.args.shouldCommit {
+					assert.Len(t, httpmock.GetTotalCallCount(), 1, "Expected Single call to Resource")
+				}
 
 				_, isPresent := httpmock.GetCallCountInfo()["POST https://localhost:8080/api/v1/devices/"]
-				assert.True(t, isPresent, "Should contain a correctly formatted POST")
+				assert.True(t, isPresent, "Should contain a correctly formatted POST to devices")
+
+				if tt.args.shouldCommit {
+					_, isPresent := httpmock.GetCallCountInfo()["POST https://localhost:8080/api/v1/configuration/"]
+					assert.True(t, isPresent, "Should contain a correctly formatted POST to configuration")
+				}
 			}
 		})
 	}
@@ -241,6 +253,9 @@ func TestDeleteThingToResource(t *testing.T) {
 	httpmock.RegisterResponder("DELETE", "https://localhost:8080/api/v1/device/test-device/",
 		httpmock.NewStringResponder(204, ``))
 
+	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/configuration/",
+		httpmock.NewStringResponder(200, ``))
+
 	type args struct {
 		rc           *resty.Client
 		thing        Thing
@@ -252,16 +267,25 @@ func TestDeleteThingToResource(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		{"valid delete thing to resource", args{rc: client, thing: &fakeDevices.Device[0], ci: ci}, false},
+		{"valid delete thing to resource, no commit", args{rc: client, thing: &fakeDevices.Device[0], ci: ci, shouldCommit: false}, false},
+		{"valid delete thing to resource and commit", args{rc: client, thing: &fakeDevices.Device[0], ci: ci, shouldCommit: true}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := DeleteThingToResource(tt.args.rc, tt.args.thing, tt.args.ci, tt.args.shouldCommit); (err != nil) != tt.wantErr {
 				t.Errorf("DeleteThingToResource() error = %v, wantErr %v", err, tt.wantErr)
-				assert.Len(t, httpmock.GetTotalCallCount(), 1, "Expected Single call to Resource")
+
+				if !tt.args.shouldCommit {
+					assert.Len(t, httpmock.GetTotalCallCount(), 1, "Expected Single call to Resource")
+				}
 
 				_, isPresent := httpmock.GetCallCountInfo()["DELETE https://localhost:8080/api/v1/devices/test-device/"]
 				assert.True(t, isPresent, "Should contain a correctly formatted POST")
+
+				if tt.args.shouldCommit {
+					_, isPresent := httpmock.GetCallCountInfo()["POST https://localhost:8080/api/v1/configuration/"]
+					assert.True(t, isPresent, "Should contain a correctly formatted POST to configuration")
+				}
 			}
 		})
 	}

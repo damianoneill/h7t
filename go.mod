@@ -3,7 +3,6 @@ module github.com/damianoneill/h7t
 go 1.13
 
 require (
-	github.com/ghodss/yaml v1.0.0
 	github.com/golangci/golangci-lint v1.21.0
 	github.com/goreleaser/goreleaser v0.120.8
 	github.com/hashicorp/go-hclog v0.0.0-20180709165350-ff2cf002a8dd

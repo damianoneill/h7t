@@ -6,8 +6,6 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/ghodss/yaml"
-
 	"github.com/damianoneill/h7t/plugins"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
@@ -32,7 +30,7 @@ var tranformDevicesCmd = &cobra.Command{
 	Use:   "devices",
 	Short: "Transform Devices configuration",
 	Long:  `Transform Devices configurations from a proprietary format into the dsl format using a bundled plugin.`,
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) (err error) {
 		inputDirectory := cmd.Flag("input_directory").Value.String()
 		// outputDirectory := cmd.Flag("output_directory").Value.String()
 		p := cmd.Flag("plugin").Value.String()
@@ -76,8 +74,7 @@ var tranformDevicesCmd = &cobra.Command{
 			fmt.Fprintf(os.Stdout, "Error: %v \n", err)
 			return
 		}
-		b, _ := yaml.Marshal(devices)
-		fmt.Fprintf(os.Stdout, "Devices: %v \n", string(b))
+		return WriteDevicesToFile(devices, cmd.Flag("output_directory").Value.String()+filePathSeperator+"devices.yml")
 	},
 }
 

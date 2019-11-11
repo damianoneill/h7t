@@ -1,5 +1,6 @@
 all: commit
-commit: 
+commit:
+	 go test ./...
 	 golangci-lint run
 	 golint ./...
 	 go mod tidy
