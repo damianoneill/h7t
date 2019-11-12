@@ -7,13 +7,13 @@ import (
 	"github.com/hashicorp/go-plugin"
 )
 
-// Arguments - composite for pass data across net/rpc
+// Arguments - composite for passing data across net/rpc
 type Arguments struct {
 	InputDirectory string
-	CmdLineArgs []string
+	CmdLineArgs    []string
 }
 
-// Transformer is the interface that we're exposing as a plugin.
+// Transformer is the interface that must be implemented by plugin authors.
 type Transformer interface {
 	Devices(args Arguments) (dsl.Devices, error)
 }
@@ -23,7 +23,7 @@ type TransformerRPC struct{ client *rpc.Client }
 
 // Devices - interface implementation
 func (g *TransformerRPC) Devices(args Arguments) (resp dsl.Devices, err error) {
-	err = g.client.Call("Plugin.Devices",args , &resp)
+	err = g.client.Call("Plugin.Devices", args, &resp)
 	return
 }
 

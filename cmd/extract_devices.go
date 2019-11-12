@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"os"
 
@@ -12,10 +13,9 @@ import (
 // WriteDevicesToFile - common function used by commands creating yaml devices
 func WriteDevicesToFile(devices dsl.Devices, namedfile string) (err error) {
 	if len(devices.Device) == 0 {
-		fmt.Fprintf(os.Stdout, "Zero Devices retrieved, not writing to file \n")
-		return
+		return errors.New("Zero Devices, not writing to file")
 	}
-	f, err := os.Create(namedfile)
+	f, err := AppFs.Create(namedfile)
 	if err != nil {
 		return
 	}

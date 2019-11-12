@@ -11,7 +11,9 @@ var logLevel = hclog.Info
 var transformCmd = &cobra.Command{
 	Use:   "transform",
 	Short: "Transform things from proprietary formats into Healthbot dsl format",
-	Long:  `Transform customer content into dsl things for e.g. devices.`,
+	Long: `Transform customer content into dsl things for e.g. devices.
+
+Transform sub-commands work by iterating over all files in the input directory`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		if cmd.Flag("verbose").Value.String() == "true" {
 			logLevel = hclog.Debug

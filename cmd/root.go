@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/spf13/afero"
+
 	"github.com/damianoneill/h7t/dsl"
 	"github.com/spf13/cobra"
 	"gopkg.in/resty.v1"
@@ -27,6 +29,9 @@ var ci dsl.ConnectionInfo
 var cfgFile string
 
 var filePathSeperator = string(filepath.Separator)
+
+// AppFs - defined for testing
+var AppFs = afero.NewOsFs()
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{

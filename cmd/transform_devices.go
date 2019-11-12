@@ -29,53 +29,58 @@ var pluginMap = map[string]plugin.Plugin{
 var tranformDevicesCmd = &cobra.Command{
 	Use:   "devices",
 	Short: "Transform Devices configuration",
-	Long:  `Transform Devices configurations from a proprietary format into the dsl format using a bundled plugin.`,
+	Long:  `Transform Devices configurations from comma separated value (csv) format into the dsl format using a bundled plugin.`,
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
 		inputDirectory := cmd.Flag("input_directory").Value.String()
-		// outputDirectory := cmd.Flag("output_directory").Value.String()
-		p := cmd.Flag("plugin").Value.String()
-		fmt.Fprintf(os.Stdout, "Plugin: %v \n", p)
-
-		// Create an hclog.Logger
-		logger := hclog.New(&hclog.LoggerOptions{
-			Name:   "plugin",
-			Output: os.Stdout,
-			Level:  logLevel,
-		})
-
-		// We're a host! Start by launching the plugin process.
-		client := plugin.NewClient(&plugin.ClientConfig{
-			HandshakeConfig: handshakeConfig,
-			Plugins:         pluginMap,
-			Cmd:             exec.Command("./plugins/csv/transformer"),
-			Logger:          logger,
-		})
-		defer client.Kill()
-
-		// Connect via RPC
-		rpcClient, err := client.Client()
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		// Request the plugin
-		raw, err := rpcClient.Dispense("transformer")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		transformer := raw.(plugins.Transformer)
-
-		devices, err := transformer.Devices(plugins.Arguments{
-			InputDirectory: inputDirectory,
-			CmdLineArgs:    args,
-		})
-		if err != nil {
-			fmt.Fprintf(os.Stdout, "Error: %v \n", err)
-			return
-		}
-		return WriteDevicesToFile(devices, cmd.Flag("output_directory").Value.String()+filePathSeperator+"devices.yml")
+		outputDirectory := cmd.Flag("output_directory").Value.String()
+		plugin := cmd.Flag("plugin").Value.String()
+		return transformDevices(inputDirectory, outputDirectory, plugin, args)
 	},
+}
+
+func transformDevices(inputDirectory, outputDirectory, p string, args []string) (err error) {
+	fmt.Fprintf(os.Stdout, "Plugin: %v \n", p)
+
+	/// Generic Plugin Code
+
+	// Create an hclog.Logger
+	logger := hclog.New(&hclog.LoggerOptions{
+		Name:   "plugin",
+		Output: os.Stdout,
+		Level:  logLevel,
+	})
+	// We're a host! Start by launching the plugin process.
+	client := plugin.NewClient(&plugin.ClientConfig{
+		HandshakeConfig: handshakeConfig,
+		Plugins:         pluginMap,
+		Cmd:             exec.Command("./plugins/csv/transformer"),
+		Logger:          logger,
+	})
+	defer client.Kill()
+	// Connect via RPC
+	rpcClient, err := client.Client()
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Request the plugin
+	raw, err := rpcClient.Dispense("transformer")
+	if err != nil {
+		log.Fatal(err)
+	}
+	transformer := raw.(plugins.Transformer)
+	devices, err := transformer.Devices(plugins.Arguments{
+		InputDirectory: inputDirectory,
+		CmdLineArgs:    args,
+	})
+
+	/// End of Generic Plugin code
+
+	if err != nil {
+		fmt.Fprintf(os.Stdout, "Error: %v \n", err)
+		return
+	}
+
+	return WriteDevicesToFile(devices, outputDirectory+filePathSeperator+"devices.yml")
 }
 
 func init() {

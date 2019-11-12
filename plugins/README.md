@@ -4,9 +4,21 @@ Customer data is available in lots of different formats. The tool provides a plu
 
 This provides an extension mechanism for writing customer plugins for doing the conversion.
 
-The plugin technology is based on hashicorp [go-plugin](https://github.com/hashicorp/go-plugin) a RPC based solution for Go plugins.
+The plugin technology is based on hashicorp [go-plugin](https://github.com/hashicorp/go-plugin) a RPC based solution for Go plugins.  
+An interface is defined that plugin authors must implement:
 
-The solution ships with a sample plugin for devices that transforms files containing records that are delimited by a definable character set for e.g. comma's, tab's, etc.
+```go
+// Arguments - composite for passing data across net/rpc
+type Arguments struct {
+	InputDirectory string
+	CmdLineArgs    []string
+}
+
+// Transformer is the interface that must be implemented by plugin authors.
+type Transformer interface {
+	Devices(args Arguments) (dsl.Devices, error)
+}
+```
 
 ## CSV Transform
 

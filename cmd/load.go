@@ -8,7 +8,9 @@ import (
 var loadCmd = &cobra.Command{
 	Use:   "load",
 	Short: "Load information into a Healthbot Installation",
-	Long:  `Load dsl into Healthbot for e.g. Devices, Device Groups, etc..`,
+	Long: `Load dsl into Healthbot for e.g. Devices, Device Groups, etc..
+
+Load sub-commands work by iterating over all files in the input directory`,
 	Run: func(cmd *cobra.Command, args []string) {
 		_ = cmd.Help()
 	},
