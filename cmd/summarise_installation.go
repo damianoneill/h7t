@@ -22,14 +22,13 @@ var summariseInstallationCmd = &cobra.Command{
 }
 
 // NewTable - provides a blank table for rendering.
-func NewTable() *tablewriter.Table {
-	table := tablewriter.NewWriter(os.Stdout)
+func NewTable(out io.Writer) *tablewriter.Table {
+	table := tablewriter.NewWriter(out)
 	table.SetBorder(false)
 	table.SetColumnSeparator("")
 	table.SetHeaderLine(false)
 	table.SetHeaderAlignment(tablewriter.ALIGN_LEFT)
 	table.SetAutoFormatHeaders(false)
-	table.Append([]string{"", "", "", ""})
 	return table
 }
 
@@ -46,12 +45,40 @@ func collectSystemDetails(rc *resty.Client, ci dsl.ConnectionInfo, stdout io.Wri
 	return
 }
 
+func collectDeviceFacts(rc *resty.Client, ci dsl.ConnectionInfo, stdout io.Writer) (df dsl.DeviceFacts, err error) {
+	err = dsl.ExtractThingFromResource(rc, &df, ci)
+	if err != nil {
+		return
+	}
+	fmt.Fprintln(stdout, "")
+	fmt.Fprintf(stdout, "No of Managed Devices: %v \n", len(df))
+	fmt.Fprintln(stdout, "")
+	return
+}
+
+func renderDeviceTable(w io.Writer, df dsl.DeviceFacts) {
+	table := NewTable(w)
+	table.SetHeader([]string{"Device Id", "Platform", "Release", "Serial Number"})
+	table.Append([]string{"", "", "", ""})
+	for _, fact := range df {
+		table.Append([]string{fact.DeviceID, fact.Facts.Platform, fact.Facts.Release, fact.Facts.SerialNumber})
+	}
+	table.Render() // Send output
+}
+
 func summariseInstallation(ci dsl.ConnectionInfo) (err error) {
 
 	err = collectSystemDetails(resty.DefaultClient, ci, os.Stdout)
 	if err != nil {
 		return
 	}
+
+	df, err := collectDeviceFacts(resty.DefaultClient, ci, os.Stdout)
+	if err != nil {
+		return
+	}
+
+	renderDeviceTable(os.Stdout, df)
 
 	return
 }
