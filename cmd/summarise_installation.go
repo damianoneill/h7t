@@ -56,6 +56,17 @@ func collectDeviceFacts(rc *resty.Client, ci dsl.ConnectionInfo, stdout io.Write
 	return
 }
 
+func collectDeviceGroups(rc *resty.Client, ci dsl.ConnectionInfo, stdout io.Writer) (dg dsl.DeviceGroups, err error) {
+	err = dsl.ExtractThingFromResource(rc, &dg, ci)
+	if err != nil {
+		return
+	}
+	fmt.Fprintln(stdout, "")
+	fmt.Fprintf(stdout, "No of Device Groups: %v \n", len(dg.DeviceGroup))
+	fmt.Fprintln(stdout, "")
+	return
+}
+
 func renderDeviceTable(w io.Writer, df dsl.DeviceFacts) {
 	table := NewTable(w)
 	table.SetHeader([]string{"Device Id", "Platform", "Release", "Serial Number"})
@@ -79,6 +90,11 @@ func summariseInstallation(ci dsl.ConnectionInfo) (err error) {
 	}
 
 	renderDeviceTable(os.Stdout, df)
+
+	_, err = collectDeviceGroups(resty.DefaultClient, ci, os.Stdout)
+	if err != nil {
+		return
+	}
 
 	return
 }

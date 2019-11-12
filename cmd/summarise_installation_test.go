@@ -181,3 +181,57 @@ func Test_renderDeviceTable(t *testing.T) {
 		})
 	}
 }
+
+func Test_collectDeviceGroups(t *testing.T) {
+	type args struct {
+		rc *resty.Client
+		ci dsl.ConnectionInfo
+	}
+	tests := []struct {
+		name       string
+		args       args
+		wantDg     dsl.DeviceGroups
+		wantStdout string
+		wantErr    bool
+	}{
+		{
+			name: "valid request",
+			args: args{
+				rc: client,
+				ci: dsl.ConnectionInfo{
+					Authority: "localhost:8080",
+					Username:  "root",
+					Password:  "changeme",
+				},
+			},
+			wantDg: dsl.DeviceGroups{
+				DeviceGroup: []dsl.DeviceGroup{{
+					DeviceGroupName: "dg1",
+				}},
+			},
+			wantStdout: "No of Device Groups: 1",
+			wantErr:    false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+
+			// create valid resty mock
+			httpmock.ActivateNonDefault(client.GetClient())
+			defer httpmock.DeactivateAndReset()
+
+			httpmock.RegisterResponder("GET", "https://localhost:8080/api/v1/device-groups/",
+				httpmock.NewStringResponder(200, `{"device-group":[{"device-group-name":"dg1","devices":["mx960-1"]}]}`))
+
+			stdout := &bytes.Buffer{}
+			_, err := collectDeviceGroups(tt.args.rc, tt.args.ci, stdout)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("collectDeviceGroups() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if gotStdout := stdout.String(); !strings.Contains(gotStdout, tt.wantStdout) {
+				t.Errorf("collectDeviceGroups() = %v, should contain %v", gotStdout, tt.wantStdout)
+			}
+		})
+	}
+}
