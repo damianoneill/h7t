@@ -235,3 +235,35 @@ func Test_collectDeviceGroups(t *testing.T) {
 		})
 	}
 }
+
+func Test_renderDeviceGroups(t *testing.T) {
+	type args struct {
+		dg dsl.DeviceGroups
+	}
+	tests := []struct {
+		name  string
+		args  args
+		wantW string
+	}{
+		{
+			name: "should contain device group with no devices",
+			args: args{
+				dg: dsl.DeviceGroups{
+					DeviceGroup: []dsl.DeviceGroup{{
+						DeviceGroupName: "dg1",
+					}},
+				},
+			},
+			wantW: "dg1                       0",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			w := &bytes.Buffer{}
+			renderDeviceGroups(w, tt.args.dg)
+			if gotW := w.String(); !strings.Contains(gotW, tt.wantW) {
+				t.Errorf("renderDeviceGroups() = %v, should contain %v", gotW, tt.wantW)
+			}
+		})
+	}
+}

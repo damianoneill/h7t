@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 
 	"github.com/damianoneill/h7t/dsl"
 	"github.com/olekukonko/tablewriter"
@@ -77,6 +78,19 @@ func renderDeviceTable(w io.Writer, df dsl.DeviceFacts) {
 	table.Render() // Send output
 }
 
+func renderDeviceGroups(w io.Writer, dg dsl.DeviceGroups) {
+	table := NewTable(w)
+	table.SetHeader([]string{"Device Group", "No of Devices"})
+	for _, deviceGroup := range dg.DeviceGroup {
+		l := "0"
+		if deviceGroup.Devices != nil {
+			l = strconv.Itoa(len(*deviceGroup.Devices))
+		}
+		table.Append([]string{deviceGroup.DeviceGroupName, l})
+	}
+	table.Render() // Send output
+}
+
 func summariseInstallation(ci dsl.ConnectionInfo) (err error) {
 
 	err = collectSystemDetails(resty.DefaultClient, ci, os.Stdout)
@@ -91,10 +105,14 @@ func summariseInstallation(ci dsl.ConnectionInfo) (err error) {
 
 	renderDeviceTable(os.Stdout, df)
 
-	_, err = collectDeviceGroups(resty.DefaultClient, ci, os.Stdout)
+	dg, err := collectDeviceGroups(resty.DefaultClient, ci, os.Stdout)
 	if err != nil {
 		return
 	}
+
+	renderDeviceGroups(os.Stdout, dg)
+
+	fmt.Println("")
 
 	return
 }
