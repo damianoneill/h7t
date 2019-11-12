@@ -9,6 +9,22 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// SystemDetails - Provides some basic hb info
+type SystemDetails struct {
+	ServerTime string `json:"server-time" yaml:"server-time"`
+	Version    string `json:"version"`
+}
+
+// Unmarshal - tries to Unmarshal yaml first, then json into the Devices struct
+func (d *SystemDetails) Unmarshal(data []byte) error {
+	return unmarshal(data, d)
+}
+
+// Path - resource path for Devices
+func (d *SystemDetails) Path() string {
+	return "/api/v1/system-details/"
+}
+
 // ConnectionInfo - used to describe the resource endpoints
 type ConnectionInfo struct {
 	Authority string
