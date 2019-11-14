@@ -1,0 +1,33 @@
+---
+device:
+  - device-id: "4200_1" # all params
+    host: 10.99.67.106
+    system-id: "4200_1"
+    authentication:
+      password:
+        password: "$9$UTHP59A0Ecl0ORSyeXxUjiqfz/Ct"
+        username: labautotest1
+    iAgent:
+      port: 830
+    open-config:
+      port: 32767
+    snmp:
+      port: 161
+      v2:
+        community: public
+    vendor:
+      juniper:
+        operating-system: junos
+  - device-id: mx960-1 # min with auth, cisco and part of snmp
+    host: 172.30.177.102
+    snmp:
+      port: 161
+    authentication:
+      password:
+        password: "$9$.mQ3EhrvMX0BIcrlLXGDjkfT369"
+        username: doneill
+    vendor:
+      cisco:
+        operating-system: iosxr
+  - device-id: mx960-3 # min
+    host: 172.30.177.113

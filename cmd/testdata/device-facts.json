@@ -1,0 +1,123 @@
+[
+  {
+    "device-id": "mx960-3",
+    "facts": {
+      "fpc": [
+        {
+          "description": "MPC7E 3D MRATE-12xQSFPP-XGE-XLGE-CGE",
+          "model-number": "MPC7E-MRATE",
+          "name": "FPC 11",
+          "part-number": "750-056519",
+          "serial-number": "CAFR4421",
+          "version": "REV 36"
+        }
+      ],
+      "hostname": "mx960-3",
+      "junos-info": [
+        {
+          "last-reboot-reason": "0x4000:VJUNOS reboot",
+          "mastership-state": "master",
+          "model": "RE-S-2X00x6",
+          "name": "re0",
+          "status": "OK",
+          "up-time": "30 days, 5 hours, 59 minutes, 51 seconds",
+          "version-info": {
+            "build": 8,
+            "major": [
+              19,
+              3
+            ],
+            "minor": [
+              "1"
+            ],
+            "type": "R"
+          }
+        }
+      ],
+      "platform": "MX960",
+      "platform-info": [
+        {
+          "name": "re0",
+          "platform": "MX960"
+        }
+      ],
+      "product": "MX",
+      "release": "19.3R1.8",
+      "serial-number": "JN1233EF1AFA"
+    }
+  },
+  {
+    "device-id": "mx960-1",
+    "facts": {
+      "fpc": [
+        {
+          "description": "MPC7E 3D MRATE-12xQSFPP-XGE-XLGE-CGE",
+          "model-number": "MPC7E-MRATE",
+          "name": "FPC 11",
+          "part-number": "750-056519",
+          "serial-number": "CAGD3519",
+          "version": "REV 40"
+        }
+      ],
+      "hostname": "mx960-1",
+      "junos-info": [
+        {
+          "last-reboot-reason": "0x4000:VJUNOS reboot",
+          "mastership-state": "master",
+          "model": "RE-S-2X00x6",
+          "name": "re0",
+          "status": "OK",
+          "up-time": "30 days, 4 hours, 52 minutes, 51 seconds",
+          "version-info": {
+            "build": 8,
+            "major": [
+              19,
+              3
+            ],
+            "minor": [
+              "1"
+            ],
+            "type": "R"
+          }
+        },
+        {
+          "last-reboot-reason": "0x4000:VJUNOS reboot",
+          "mastership-state": "backup",
+          "model": "RE-S-2X00x6",
+          "name": "re1",
+          "status": "OK",
+          "up-time": "30 days, 5 hours, 7 seconds",
+          "version-info": {
+            "build": 8,
+            "major": [
+              19,
+              3
+            ],
+            "minor": [
+              "1"
+            ],
+            "type": "R"
+          }
+        }
+      ],
+      "platform": "MX960",
+      "platform-info": [
+        {
+          "name": "re0",
+          "platform": "MX960"
+        },
+        {
+          "name": "re1",
+          "platform": "MX960"
+        }
+      ],
+      "product": "MX",
+      "release": "19.3R1.8",
+      "serial-number": "JN1232C39AFA"
+    }
+  },
+  {
+    "device-id": "rubbish",
+    "facts": {}
+  }
+]
