@@ -59,9 +59,12 @@ func applyNetconfRPC(devicesFiles []string, rpcFilename string) (err error) {
 		}
 		for _, d := range devices.Device {
 			rpcError := sendRPC(d, rpcFile)
-			fmt.Fprintf(os.Stdout, "Problem with configuring Device %v: %v", d.DeviceID, rpcError)
-			// do not error out, could be device is gone, continue trying others
+			if rpcError != nil {
+				fmt.Fprintf(os.Stdout, "Problem with Device %v: %v", d.DeviceID, rpcError)
+				// do not error out, could be device is gone, continue trying others
+			}
 		}
+		fmt.Fprintf(os.Stdout, "Sent request to %v Devices defined in %v\n", devices.Count(), device)
 	}
 	return
 }
