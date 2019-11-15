@@ -28,6 +28,22 @@ func appendResourceBody(backup *[]byte, responseBody []byte) (err error) {
 	return
 }
 
+func createHelper(rc *resty.Client, resource string, filename string) (err error) {
+	resp, restErr := rc.R().
+		SetBasicAuth(ci.Username, ci.Password).
+		Get("https://" + ci.Authority + resource)
+	if restErr != nil {
+		return restErr
+	}
+	// write it to file
+	err = afero.WriteFile(AppFs, filename, resp.Body(), 0777)
+	if err != nil {
+		return
+	}
+	fmt.Fprintf(os.Stdout, "Extracted helper files to %v\n", filename)
+	return
+}
+
 func createBackup(rc *resty.Client, resources []string, filename string) (err error) {
 	b := []byte{'{'}
 	for _, resource := range resources {
@@ -43,11 +59,14 @@ func createBackup(rc *resty.Client, resources []string, filename string) (err er
 			if err != nil {
 				return
 			}
-			fmt.Fprintf(os.Stdout, "Including in backup: %v \n", resource)
+			fmt.Fprintf(os.Stdout, "Including: %v \n", resource)
+		} else {
+			fmt.Fprintf(os.Stdout, "Excluding (no content): %v \n", resource)
 		}
 	}
 
 	// need to remove the last comma we added, to make it valid json or the indenter will barf
+	// and close the outer object
 	b = bytes.TrimSuffix(b, []byte(","))
 	b = append(b, '}')
 
@@ -58,7 +77,12 @@ func createBackup(rc *resty.Client, resources []string, filename string) (err er
 		return
 	}
 
+	// write it to file
 	err = afero.WriteFile(AppFs, filename, prettyJSON.Bytes(), 0777)
+	if err != nil {
+		return
+	}
+	fmt.Fprintf(os.Stdout, "Extracted config to %v\n", filename)
 	return
 }
 
@@ -90,7 +114,7 @@ var extractInstallationCmd = &cobra.Command{
 		}
 
 		// TODO Helper Files
-
+		err = createHelper(resty.DefaultClient, "/api/v1/files/helper-files/backup", cmd.Flag("output_directory").Value.String()+filePathSeperator+"healthbot_helpers-"+t.Format("20060102150405")+".tar.gz")
 		return
 	},
 }

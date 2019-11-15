@@ -19,3 +19,4 @@ h7t
 .idea
 /plugins/csv/transformer
 .testCoverage.txt
+.DS_Store
