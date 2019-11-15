@@ -6,6 +6,8 @@
 
 A command line tool for interacting with [Juniper Healthbot](https://www.juniper.net/us/en/products-services/sdn/contrail/contrail-healthbot/).
 
+> Note Device Group functionality is limited currently, this will be updated after Healthbot 2.1 is released.
+
 ## Synopsis
 
 A tool for interacting with Healthbot over the REST API.
