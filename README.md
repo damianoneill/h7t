@@ -20,7 +20,8 @@ h7t
 │   └── devices
 ├── extract
 │   ├── device-groups
-│   └── devices
+│   ├── devices
+│   └── installation
 ├── load
 │   ├── device-groups
 │   ├── devices

@@ -1,19 +1,19 @@
-## h7t extract device-groups
+## h7t extract installation
 
-Extract Device Groups configuration
+Extract installation configuration
 
 ### Synopsis
 
-Collect from a Healthbot installation the configuration for the Devices Groups.
+Collect from a Healthbot installation the complete configuration and generate a backup file.
 
 ```
-h7t extract device-groups [flags]
+h7t extract installation [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for device-groups
+  -h, --help   help for installation
 ```
 
 ### Options inherited from parent commands
