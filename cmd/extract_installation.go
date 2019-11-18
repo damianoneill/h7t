@@ -12,18 +12,22 @@ import (
 	"gopkg.in/resty.v1"
 )
 
-func appendResourceBody(backup *[]byte, responseBody []byte) (err error) {
+func removeBracketsFromJSONObject(src []byte) (bare []byte, err error) {
 	// remove all whitespace / carriage returns, etc.
 	buffer := new(bytes.Buffer)
-	err = json.Compact(buffer, responseBody)
+	err = json.Compact(buffer, src)
 	if err != nil {
 		return
 	}
-	// remove outer brackets
-	by := bytes.TrimPrefix(buffer.Bytes(), []byte("{"))
-	by = bytes.TrimSuffix(by, []byte("}"))
+	bare = bytes.TrimPrefix(buffer.Bytes(), []byte("{"))
+	bare = bytes.TrimSuffix(bare, []byte("}"))
+	return
+}
+
+func appendResourceBody(backup *[]byte, responseBody []byte) (err error) {
+	b, err := removeBracketsFromJSONObject(responseBody)
 	// append to main json object and add comma in advance of next object being added
-	*backup = append(*backup, by...)
+	*backup = append(*backup, b...)
 	*backup = append(*backup, ',')
 	return
 }

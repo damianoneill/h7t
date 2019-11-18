@@ -1,8 +1,11 @@
 package cmd
 
-import "testing"
+import (
+	"strings"
+	"testing"
 
-import "github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
+)
 
 func Test_appendResourceBody(t *testing.T) {
 	// fugly test
@@ -13,4 +16,15 @@ func Test_appendResourceBody(t *testing.T) {
 	err := appendResourceBody(&backup, responseBody)
 	assert.Nil(t, err, "Should not return an error %v", err)
 	assert.Equal(t, expected, backup, "should start with { and end with , and separate objects with a comma")
+}
+
+func Test_removeBracketsFromJSONObject(t *testing.T) {
+	b, err := removeBracketsFromJSONObject(HelperLoadBytes(t, "devices.json"))
+	if err != nil {
+		t.Errorf("removeBracketsFromJSONObject() error = %v", err)
+		return
+	}
+	got := string(b)
+	assert.True(t, strings.HasPrefix(got, "\"device\":"), "Should start with device colon")
+	assert.True(t, strings.HasSuffix(got, "]"), "Should end with square bracket")
 }

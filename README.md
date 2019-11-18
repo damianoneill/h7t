@@ -8,6 +8,8 @@ A command line tool for interacting with [Juniper Healthbot](https://www.juniper
 
 > Note Device Group functionality is limited currently, this will be updated after Healthbot 2.1 is released.
 
+[![asciicast](https://asciinema.org/a/FsdPZpORfIuciQ70rTgGvtf4M.svg)](https://asciinema.org/a/FsdPZpORfIuciQ70rTgGvtf4M)
+
 ## Synopsis
 
 A tool for interacting with Healthbot over the REST API.

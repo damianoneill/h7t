@@ -203,8 +203,6 @@ github.com/googleapis/gax-go v2.0.2+incompatible h1:silFMLAnr330+NRuag/VjIGF7TLp
 github.com/googleapis/gax-go v2.0.2+incompatible/go.mod h1:SFVmujtThgffbyetf+mdk2eWhX2bMyUtNHzFKcPA9HY=
 github.com/googleapis/gax-go/v2 v2.0.4 h1:hU4mGcQI4DaAYW+IbTun+2qEZVFxK0ySjQLTbS0VQKc=
 github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+vpHVxEJEs9eg=
-github.com/goreleaser/goreleaser v0.121.0 h1:CeOa4lqMI1TlPXral4PeMxWoRQv+fq0JTPUUVsl+P4Y=
-github.com/goreleaser/goreleaser v0.121.0/go.mod h1:Acn33/psgsNrPClBfaYjaqmtfK4ilOIWQWYEls6nOPs=
 github.com/goreleaser/goreleaser v0.122.0 h1:83xV9cUrXErdvIVnIAXYZkmZFdY139RvihqxrwswxrY=
 github.com/goreleaser/goreleaser v0.122.0/go.mod h1:Acn33/psgsNrPClBfaYjaqmtfK4ilOIWQWYEls6nOPs=
 github.com/goreleaser/nfpm v1.1.5 h1:bjVIflQl0b3lNQvO/b++cKMKXW+INL70AdGR+zDXWps=

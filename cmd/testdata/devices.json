@@ -1,0 +1,24 @@
+{
+  "device": [
+    {
+      "authentication": {
+        "password": {
+          "password": "$9$rgFlWXJZjq.5YgoGjif51RESKMX7-",
+          "username": "doneill"
+        }
+      },
+      "device-id": "mmx960-1",
+      "host": "172.30.177.102"
+    },
+    {
+      "authentication": {
+        "password": {
+          "password": "$9$TQ6CrlMXxdRhSeMW-dHq.fFnCtu",
+          "username": "doneill"
+        }
+      },
+      "device-id": "mmx960-3",
+      "host": "172.30.177.113"
+    }
+  ]
+}
