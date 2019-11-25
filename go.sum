@@ -200,6 +200,8 @@ github.com/google/pprof v0.0.0-20181206194817-3ea8567a2e57/go.mod h1:zfwlbNMJ+OI
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
 github.com/google/rpmpack v0.0.0-20191101142923-13d81472ccfe h1:P1WflKHEgTAYe39btxYzeds84DhxQSLj4hfoNn0tCyQ=
 github.com/google/rpmpack v0.0.0-20191101142923-13d81472ccfe/go.mod h1:RaTPr0KUf2K7fnZYLNDrr8rxAamWs3iNywJLtQ2AzBg=
+github.com/google/rpmpack v0.0.0-20191123225850-3293c964e1e6 h1:iTi+hixsnUSMvXFp3vr+84Paw9+jyDikfmMcZlTMoTI=
+github.com/google/rpmpack v0.0.0-20191123225850-3293c964e1e6/go.mod h1:RaTPr0KUf2K7fnZYLNDrr8rxAamWs3iNywJLtQ2AzBg=
 github.com/google/subcommands v1.0.1/go.mod h1:ZjhPrFU+Olkh9WazFPsl27BQ4UPiG37m3yTrtFlrHVk=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
@@ -213,8 +215,12 @@ github.com/goreleaser/goreleaser v0.122.0 h1:83xV9cUrXErdvIVnIAXYZkmZFdY139Rvihq
 github.com/goreleaser/goreleaser v0.122.0/go.mod h1:Acn33/psgsNrPClBfaYjaqmtfK4ilOIWQWYEls6nOPs=
 github.com/goreleaser/goreleaser v0.123.1 h1:dF9hrTc0TTh/p9FZI0my4QpjzljQlBEJAaGTE/tZTII=
 github.com/goreleaser/goreleaser v0.123.1/go.mod h1:E2iyhIqrWVzc6Ebi1rdLv11qE8Nb0a7PjiZoek0vKZY=
+github.com/goreleaser/goreleaser v0.123.3 h1:pzjxKju+w044g9GDACTFURPdHsiez6/LnFCIjU/mgQM=
+github.com/goreleaser/goreleaser v0.123.3/go.mod h1:9tNgVXCGonIucdEKktFab9wADB9GM+QaT750lYxeHBY=
 github.com/goreleaser/nfpm v1.1.5 h1:bjVIflQl0b3lNQvO/b++cKMKXW+INL70AdGR+zDXWps=
 github.com/goreleaser/nfpm v1.1.5/go.mod h1:4V1IQlCSizz8KHXBb0C82xIh/NNJdLo332q1T4r909U=
+github.com/goreleaser/nfpm v1.1.8 h1:opYmvGrQ4GnZQ40JAqB+Eq3oFF3kTJFqlUOArKeKkSg=
+github.com/goreleaser/nfpm v1.1.8/go.mod h1:Fw9rnW29sSiGMp4lGXyP+jmJRu/dhnx189eI/8SQvxc=
 github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
 github.com/gostaticanalysis/analysisutil v0.0.0-20190318220348-4088753ea4d3 h1:JVnpOZS+qxli+rgVl98ILOXVNbW+kb5wcxeGx8ShUIw=
 github.com/gostaticanalysis/analysisutil v0.0.0-20190318220348-4088753ea4d3/go.mod h1:eEOZF4jCKGi+aprrirO9e7WKB3beBRtWgqGunKl6pKE=
