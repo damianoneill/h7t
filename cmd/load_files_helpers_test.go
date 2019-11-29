@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"path/filepath"
 	"testing"
 
 	"github.com/damianoneill/h7t/dsl"
@@ -25,9 +26,12 @@ func TestPostHelperFileToResource(t *testing.T) {
 		httpmock.NewStringResponder(200, ``))
 
 	type args struct {
-		rc       *resty.Client
-		filename string
-		ci       dsl.ConnectionInfo
+		rc           *resty.Client
+		filename     string
+		path         string
+		paramName    string
+		ci           dsl.ConnectionInfo
+		shouldCommit bool
 	}
 	tests := []struct {
 		name    string
@@ -37,20 +41,23 @@ func TestPostHelperFileToResource(t *testing.T) {
 		{
 			name: "valid file upload",
 			args: args{
-				rc:       client,
-				filename: matchFile,
+				rc:        client,
+				filename:  matchFile,
+				paramName: "up_file",
+				path:      "/api/v1/files/helper-files/" + filepath.Base(matchFile) + "/",
 				ci: dsl.ConnectionInfo{
 					Authority: "localhost:8080",
 					Username:  "root",
 					Password:  "changeme",
 				},
+				shouldCommit: false,
 			},
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := PostHelperFileToResource(tt.args.rc, tt.args.filename, tt.args.ci); (err != nil) != tt.wantErr {
+			if err := PostFileToResource(tt.args.rc, tt.args.filename, tt.args.path, tt.args.paramName, tt.args.ci, tt.args.shouldCommit); (err != nil) != tt.wantErr {
 				t.Errorf("PostHelperFileToResource() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

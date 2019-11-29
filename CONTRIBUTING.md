@@ -35,7 +35,7 @@ The following are the list objects supported / planned by h7t, this includes Hea
 - device
 - devices
 - device-groups
-- helper-files
+- files
 - installation
 
 ### States

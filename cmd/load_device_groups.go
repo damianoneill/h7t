@@ -21,5 +21,6 @@ var loadDeviceGroupsCmd = &cobra.Command{
 }
 
 func init() {
+	loadDeviceGroupsCmd.PersistentFlags().BoolP("erase", "e", false, "erase the thing(s) identified in configuration")
 	loadCmd.AddCommand(loadDeviceGroupsCmd)
 }

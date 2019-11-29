@@ -10,7 +10,6 @@ require (
 	github.com/hashicorp/go-plugin v1.0.1
 	github.com/jarcoal/httpmock v1.0.4
 	github.com/jszwec/csvutil v1.2.1
-	github.com/mattn/go-runewidth v0.0.5 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.3
 	github.com/satori/go.uuid v1.2.0 // indirect
