@@ -29,7 +29,10 @@ h7t
 ├── load
 │   ├── device-groups
 │   ├── devices
-│   └── helper-files
+│   └── files
+│       ├── helper-files
+│       ├── playbooks
+│       └── rules
 ├── summarise
 │   └── installation
 └── transform
