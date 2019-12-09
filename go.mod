@@ -11,7 +11,7 @@ require (
 	github.com/jarcoal/httpmock v1.0.4
 	github.com/jszwec/csvutil v1.2.1
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/olekukonko/tablewriter v0.0.3
+	github.com/olekukonko/tablewriter v0.0.4
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spf13/afero v1.2.2
 	github.com/spf13/cobra v0.0.5
