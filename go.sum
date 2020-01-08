@@ -27,6 +27,8 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/GoogleCloudPlatform/cloudsql-proxy v0.0.0-20190605020000-c4ba1fdf4d36/go.mod h1:aJ4qN3TfrelA6NZ6AXsXRfmEVaYin3EDbSPJrKS8OXo=
 github.com/Masterminds/semver/v3 v3.0.2 h1:tRi7ENs+AaOUCH+j6qwNQgPYfV26dX3JNonq+V4mhqc=
 github.com/Masterminds/semver/v3 v3.0.2/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
+github.com/Masterminds/semver/v3 v3.0.3 h1:znjIyLfpXEDQjOIEWh+ehwpTU14UzUPub3c3sm36u14=
+github.com/Masterminds/semver/v3 v3.0.3/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/OpenPeeDeeP/depguard v1.0.1 h1:VlW4R6jmBIv3/u1JNlawEvJMM4J+dPORPaZasQee8Us=
 github.com/OpenPeeDeeP/depguard v1.0.1/go.mod h1:xsIw86fROiiwelg+jB2uM9PiKihMMmUx/1V+TNhjQvM=
@@ -56,6 +58,8 @@ github.com/blakesmith/ar v0.0.0-20190502131153-809d4375e1fb h1:m935MPodAbYS46DG4
 github.com/blakesmith/ar v0.0.0-20190502131153-809d4375e1fb/go.mod h1:PkYb9DJNAwrSvRx5DYA+gUcOIgTGVMNkfSCbZM8cWpI=
 github.com/bombsimon/wsl v1.2.5 h1:9gTOkIwVtoDZywvX802SDHokeX4kW1cKnV8ZTVAPkRs=
 github.com/bombsimon/wsl v1.2.5/go.mod h1:43lEF/i0kpXbLCeDXL9LMT8c92HyBywXb0AsgMHYngM=
+github.com/caarlos0/cmdstream v0.1.0 h1:Y9EOUEp0e7Lh09vaVXq0psc6gqUYXnLzfD+WAciRW50=
+github.com/caarlos0/cmdstream v0.1.0/go.mod h1:JV0/yP9NA7jR+rYk7gDk0K43FxcxaduXpGhYEe8olNc=
 github.com/caarlos0/ctrlc v1.0.0 h1:2DtF8GSIcajgffDFJzyG15vO+1PuBWOMUdFut7NnXhw=
 github.com/caarlos0/ctrlc v1.0.0/go.mod h1:CdXpj4rmq0q/1Eb44M9zi2nKB0QraNKuRGYGrrHhcQw=
 github.com/campoy/unique v0.0.0-20180121183637-88950e537e7e h1:V9a67dfYqPLAvzk5hMQOXYJlZ4SLIXgyKIE+ZiHzgGQ=
@@ -205,8 +209,12 @@ github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+
 github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
 github.com/goreleaser/goreleaser v0.123.3 h1:pzjxKju+w044g9GDACTFURPdHsiez6/LnFCIjU/mgQM=
 github.com/goreleaser/goreleaser v0.123.3/go.mod h1:9tNgVXCGonIucdEKktFab9wADB9GM+QaT750lYxeHBY=
+github.com/goreleaser/goreleaser v0.124.0 h1:/XiQ6nZSgfaviwcP2nZf1Qvu/d6ZWoso9hCiKGd1oFo=
+github.com/goreleaser/goreleaser v0.124.0/go.mod h1:zUcnAwApjWut9dJFxi5ed4vtyKm1p9q8yaAuIwUKW5U=
 github.com/goreleaser/nfpm v1.1.8 h1:opYmvGrQ4GnZQ40JAqB+Eq3oFF3kTJFqlUOArKeKkSg=
 github.com/goreleaser/nfpm v1.1.8/go.mod h1:Fw9rnW29sSiGMp4lGXyP+jmJRu/dhnx189eI/8SQvxc=
+github.com/goreleaser/nfpm v1.1.9 h1:MY1gWqFjs6XNp0wAwgnk1J7DgOj7igYKlbmiAQGAwtI=
+github.com/goreleaser/nfpm v1.1.9/go.mod h1:koO42gCO77Wt26VbbpGqB8AqEudWAGU4e1rZv9FsAdU=
 github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
 github.com/gostaticanalysis/analysisutil v0.0.0-20190318220348-4088753ea4d3 h1:JVnpOZS+qxli+rgVl98ILOXVNbW+kb5wcxeGx8ShUIw=
 github.com/gostaticanalysis/analysisutil v0.0.0-20190318220348-4088753ea4d3/go.mod h1:eEOZF4jCKGi+aprrirO9e7WKB3beBRtWgqGunKl6pKE=
@@ -419,6 +427,8 @@ github.com/valyala/quicktemplate v1.2.0/go.mod h1:EH+4AkTd43SvgIbQHYu59/cJyxDoOV
 github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a/go.mod h1:v3UYOV9WzVtRmSR+PDvWpU/qWl4Wa5LApYYX4ZtKbio=
 github.com/xanzy/go-gitlab v0.22.1 h1:TVxgHmoa35jQL+9FCkG0nwPDxU9dQZXknBTDtGaSFno=
 github.com/xanzy/go-gitlab v0.22.1/go.mod h1:t4Bmvnxj7k37S4Y17lfLx+nLqkf/oQwT2HagfWKv5Og=
+github.com/xanzy/go-gitlab v0.22.2 h1:KYPewSm3Tl7WHrVON7BOwX6FZ1gaiFEdpOt0DNIYySA=
+github.com/xanzy/go-gitlab v0.22.2/go.mod h1:t4Bmvnxj7k37S4Y17lfLx+nLqkf/oQwT2HagfWKv5Og=
 github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 h1:nIPpBwaJSVYIxUFsDv3M8ofmx9yWTog9BfvIu0q41lo=
 github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8/go.mod h1:HUYIGzjTL3rfEspMxjDjgmT5uz5wzYJKVo23qUhYTos=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
