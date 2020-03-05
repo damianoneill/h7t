@@ -78,6 +78,7 @@ github.com/cavaliercoder/go-cpio v0.0.0-20180626203310-925f9528c45e h1:hHg27A0RS
 github.com/cavaliercoder/go-cpio v0.0.0-20180626203310-925f9528c45e/go.mod h1:oDpT4efm8tSYHXV5tHSdRvBet/b/QzxZ+XyyPehvm3A=
 github.com/census-instrumentation/opencensus-proto v0.2.0 h1:LzQXZOgg4CQfE6bFvXGM30YZL1WW/M337pXml+GrcZ4=
 github.com/census-instrumentation/opencensus-proto v0.2.0/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
+github.com/census-instrumentation/opencensus-proto v0.2.1 h1:glEXhBS5PSLLv4IXzLA5yPRVX4bilULVyxxbrfOtDAk=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
@@ -258,6 +259,8 @@ github.com/goreleaser/goreleaser v0.126.0 h1:HBTnbpmj6ky2ldazphAzNqlb5+OGZtlbdmM
 github.com/goreleaser/goreleaser v0.126.0/go.mod h1:2PPXDBjNMk+HVIJxRQ6k/09lkSo6xyUlwv2Wte5Z9VM=
 github.com/goreleaser/goreleaser v0.127.0 h1:E7tY5GcEp5loepuSwmmkoxBWJuHdW9jI9GePJhSpN6Q=
 github.com/goreleaser/goreleaser v0.127.0/go.mod h1:48FJ23o3PwfOVnynARQR0lZhSUbg8z4ViG6ykvOTLCM=
+github.com/goreleaser/goreleaser v0.128.0 h1:H+eD0N/Ypvy6ltmNG1aDysUrXps0teCdr4B2QO60dyg=
+github.com/goreleaser/goreleaser v0.128.0/go.mod h1:YE06TwR5768HesL2uap5HnSSofE+4Y1CzKHP6ArDX8A=
 github.com/goreleaser/nfpm v1.1.8 h1:opYmvGrQ4GnZQ40JAqB+Eq3oFF3kTJFqlUOArKeKkSg=
 github.com/goreleaser/nfpm v1.1.8/go.mod h1:Fw9rnW29sSiGMp4lGXyP+jmJRu/dhnx189eI/8SQvxc=
 github.com/goreleaser/nfpm v1.1.9 h1:MY1gWqFjs6XNp0wAwgnk1J7DgOj7igYKlbmiAQGAwtI=
@@ -320,6 +323,8 @@ github.com/kamilsk/retry/v4 v4.4.1 h1:nbcZ8axT87PrEg+7za3tBU9x5+iWeiiBc/jRxaq9Dp
 github.com/kamilsk/retry/v4 v4.4.1/go.mod h1:pIQtBtycHTXScrJmpu3N2SSBT07s07Uruq2Au1aRLks=
 github.com/kamilsk/retry/v4 v4.5.0 h1:TcfpmIdzFEfSWLwHJhA+WPAmo5qT2pl/HqqzFat2M+I=
 github.com/kamilsk/retry/v4 v4.5.0/go.mod h1:pIQtBtycHTXScrJmpu3N2SSBT07s07Uruq2Au1aRLks=
+github.com/kamilsk/retry/v4 v4.7.2 h1:8C33aqTQtTSvPf7MpLZ4xSY4JZK2YCvY+hTlsbiHNq8=
+github.com/kamilsk/retry/v4 v4.7.2/go.mod h1:pIQtBtycHTXScrJmpu3N2SSBT07s07Uruq2Au1aRLks=
 github.com/kisielk/errcheck v1.1.0/go.mod h1:EZBBE59ingxPouuu3KfxchcWSUPOHkagtvWXihfKN4Q=
 github.com/kisielk/gotool v1.0.0 h1:AV2c/EiW3KqPNT9ZKl07ehoAGi4C5/01Cfbblndcapg=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
@@ -520,6 +525,8 @@ github.com/xanzy/go-gitlab v0.22.3 h1:/rNlZ2hquUWNc6rJdntVM03tEOoTmnZ1lcNyJCl0Wl
 github.com/xanzy/go-gitlab v0.22.3/go.mod h1:t4Bmvnxj7k37S4Y17lfLx+nLqkf/oQwT2HagfWKv5Og=
 github.com/xanzy/go-gitlab v0.26.0 h1:eAnJRBUC+GDJSy8OoGCZBqBMpXsGOOT235TFm/F8C0Q=
 github.com/xanzy/go-gitlab v0.26.0/go.mod h1:t4Bmvnxj7k37S4Y17lfLx+nLqkf/oQwT2HagfWKv5Og=
+github.com/xanzy/go-gitlab v0.27.0 h1:zy7xBB8+PID6izH07ZArtkEisJ192dtQajRaeo4+glg=
+github.com/xanzy/go-gitlab v0.27.0/go.mod h1:t4Bmvnxj7k37S4Y17lfLx+nLqkf/oQwT2HagfWKv5Og=
 github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 h1:nIPpBwaJSVYIxUFsDv3M8ofmx9yWTog9BfvIu0q41lo=
 github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8/go.mod h1:HUYIGzjTL3rfEspMxjDjgmT5uz5wzYJKVo23qUhYTos=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
