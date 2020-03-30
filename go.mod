@@ -14,7 +14,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spf13/afero v1.2.2
-	github.com/spf13/cobra v0.0.6
+	github.com/spf13/cobra v0.0.7
 	github.com/spf13/viper v1.6.2
 	github.com/stretchr/testify v1.5.1
 	github.com/tj/assert v0.0.0-20171129193455-018094318fb0
