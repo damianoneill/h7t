@@ -305,6 +305,8 @@ github.com/hashicorp/go-plugin v1.1.0 h1:HGUJ/UDgeYfIBYT1ciftFUMSzbrheczUObdtuIA
 github.com/hashicorp/go-plugin v1.1.0/go.mod h1:popwcT5Xlw1syWU1GfAOQYhYt1xEf6hTOdJZbQNQcnQ=
 github.com/hashicorp/go-plugin v1.2.0 h1:CUfYokW0EJNDcGecVrHZK//Cp1GFlHwoqtcUIEiU6BY=
 github.com/hashicorp/go-plugin v1.2.0/go.mod h1:F9eH4LrE/ZsRdbwhfjs9k9HoDUwAHnYtXdgmf1AVNs0=
+github.com/hashicorp/go-plugin v1.2.2 h1:mgDpq0PkoK5gck2w4ivaMpWRHv/matdOR4xmeScmf/w=
+github.com/hashicorp/go-plugin v1.2.2/go.mod h1:F9eH4LrE/ZsRdbwhfjs9k9HoDUwAHnYtXdgmf1AVNs0=
 github.com/hashicorp/go-retryablehttp v0.6.4 h1:BbgctKO892xEyOXnGiaAwIoSq1QZ/SS4AhjoAh9DnfY=
 github.com/hashicorp/go-retryablehttp v0.6.4/go.mod h1:vAew36LZh98gCBJNLH42IQ1ER/9wtLZZ8meHqQvEYWY=
 github.com/hashicorp/go-version v1.2.0 h1:3vNe/fWF5CBgRIguda1meWhsZHy3m8gCJ5wx+dIzX/E=
