@@ -7,7 +7,7 @@ require (
 	github.com/golangci/golangci-lint v1.25.1
 	github.com/goreleaser/goreleaser v0.131.1
 	github.com/hashicorp/go-hclog v0.12.2
-	github.com/hashicorp/go-plugin v1.2.0
+	github.com/hashicorp/go-plugin v1.2.2
 	github.com/jarcoal/httpmock v1.0.5
 	github.com/jszwec/csvutil v1.3.0
 	github.com/mitchellh/go-homedir v1.1.0
