@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/damianoneill/net v0.1.2
-	github.com/golangci/golangci-lint v1.25.1
+	github.com/golangci/golangci-lint v1.26.0
 	github.com/goreleaser/goreleaser v0.131.1
 	github.com/hashicorp/go-hclog v0.12.2
 	github.com/hashicorp/go-plugin v1.2.2
