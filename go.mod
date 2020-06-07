@@ -15,7 +15,7 @@ require (
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spf13/afero v1.2.2
 	github.com/spf13/cobra v0.0.7
-	github.com/spf13/viper v1.6.3
+	github.com/spf13/viper v1.7.0
 	github.com/stretchr/testify v1.5.1
 	github.com/tj/assert v0.0.0-20171129193455-018094318fb0
 	golang.org/x/crypto v0.0.0-20191002192127-34f69633bfdc
