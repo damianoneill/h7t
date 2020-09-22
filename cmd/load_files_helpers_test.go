@@ -21,6 +21,9 @@ func TestPostHelperFileToResource(t *testing.T) {
 	httpmock.ActivateNonDefault(client.GetClient())
 	defer httpmock.DeactivateAndReset()
 
+	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/login",
+		httpmock.NewStringResponder(200, `{"accessToken": "aaa-some-token-aaa"}`))
+
 	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/files/helper-files/anyfile.txt/",
 		httpmock.NewStringResponder(200, ``))
 

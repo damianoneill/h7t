@@ -15,7 +15,12 @@ import (
 
 // DeleteFileToResource - Specific op for DELETING Files
 func DeleteFileToResource(rc *resty.Client, filename, path string, ci dsl.ConnectionInfo) (err error) {
+	t, err := dsl.GetToken(rc, ci)
+	if err != nil {
+		return err
+	}
 	resp, err := rc.R().
+		SetAuthToken(t.AccessToken).
 		SetBasicAuth(ci.Username, ci.Password).
 		Delete("https://" + ci.Authority + path)
 	if err != nil {
@@ -38,7 +43,12 @@ func PostFileToResource(rc *resty.Client, filename, path, paramName string, ci d
 		return
 	}
 	defer f.Close()
+	t, err := dsl.GetToken(rc, ci)
+	if err != nil {
+		return err
+	}
 	resp, err := rc.R().
+		SetAuthToken(t.AccessToken).
 		SetBasicAuth(ci.Username, ci.Password).
 		SetFileReader(paramName, filepath.Base(filename), f). // stripping path from filename
 		Post("https://" + ci.Authority + path)
@@ -53,6 +63,7 @@ func PostFileToResource(rc *resty.Client, filename, path, paramName string, ci d
 	}
 	if shouldCommit {
 		_, err = rc.R().
+			SetAuthToken(t.AccessToken).
 			SetBasicAuth(ci.Username, ci.Password).
 			Post("https://" + ci.Authority + "/api/v1/configuration/")
 		if err != nil {
@@ -60,7 +71,7 @@ func PostFileToResource(rc *resty.Client, filename, path, paramName string, ci d
 		}
 	}
 	fmt.Fprintf(os.Stdout, "Uploaded %v to %v \n", filename, ci.Authority)
-	return
+	return err
 }
 
 // loadFilesHelpersCmd represents the Helper Files command

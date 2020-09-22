@@ -7,6 +7,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/damianoneill/h7t/dsl"
+
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
 	"gopkg.in/resty.v1"
@@ -33,7 +35,12 @@ func appendResourceBody(backup *[]byte, responseBody []byte) (err error) {
 }
 
 func createHelper(rc *resty.Client, resource, filename string) (err error) {
+	t, err := dsl.GetToken(rc, ci)
+	if err != nil {
+		return err
+	}
 	resp, restErr := rc.R().
+		SetAuthToken(t.AccessToken).
 		SetBasicAuth(ci.Username, ci.Password).
 		Get("https://" + ci.Authority + resource)
 	if restErr != nil {
@@ -50,8 +57,13 @@ func createHelper(rc *resty.Client, resource, filename string) (err error) {
 
 func createBackup(rc *resty.Client, resources []string, filename string) (err error) {
 	b := []byte{'{'}
+	t, err := dsl.GetToken(rc, ci)
+	if err != nil {
+		return err
+	}
 	for _, resource := range resources {
 		resp, restErr := rc.R().
+			SetAuthToken(t.AccessToken).
 			SetBasicAuth(ci.Username, ci.Password).
 			Get("https://" + ci.Authority + resource)
 		if restErr != nil {
@@ -107,7 +119,7 @@ var extractInstallationCmd = &cobra.Command{
 			"/api/v1/system-settings/report-generation/destinations/",
 			"/api/v1/system-settings/report-generation/reports/",
 			"/api/v1/system-settings/schedulers",
-			"/api/v1/data-store/grafana/",
+			// "/api/v1/data-store/grafana/",
 			// TODO - extra resources in 2.1?
 		}
 
