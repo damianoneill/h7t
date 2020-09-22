@@ -45,3 +45,19 @@ A full list of the commands and their options is described in the [docs](./docs/
 ## Transforms
 
 The tool includes a plugin based solution for transforming customer data into a format that can be consumed. Further information is available in the [plugins](./plugins/) directory.
+
+## Docker
+
+An image is maintained on Docker Hub.
+
+It can be pulled as follows:
+
+```console
+docker pull damianoneill/h7t:v1.3.0
+```
+
+And as an example, run the configure devices, with a sample.rpc in your current directory, as follows: 
+
+```console
+docker run -v "$(pwd):/config" damianoneill/h7t:v1.3.0 configure devices -i /config -f /config/sample.rpc
+```
