@@ -3,6 +3,7 @@ package dsl
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 
@@ -56,11 +57,19 @@ func WriteThingToFile(thing Thing, fw io.Writer) (err error) {
 
 // ExtractThingFromResource - Use the Things Path function to build a GET REST requests and unmarshal body to yaml
 func ExtractThingFromResource(rc *resty.Client, thing Thing, ci ConnectionInfo) (err error) {
+	t, err := GetToken(rc, ci)
+	if err != nil {
+		return err
+	}
 	resp, err := rc.R().
+		SetAuthToken(t.AccessToken).
 		SetBasicAuth(ci.Username, ci.Password).
 		Get("https://" + ci.Authority + thing.Path())
 	if err != nil {
 		return
+	}
+	if resp.StatusCode() != http.StatusOK {
+		return errors.New(resp.String())
 	}
 	err = thing.Unmarshal(resp.Body())
 	return
@@ -68,7 +77,12 @@ func ExtractThingFromResource(rc *resty.Client, thing Thing, ci ConnectionInfo) 
 
 // PostThingToResource - Use the Things Path function to build a POST REST requests and marshal body
 func PostThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, shouldCommit bool) (err error) {
+	t, err := GetToken(rc, ci)
+	if err != nil {
+		return err
+	}
 	resp, err := rc.R().
+		SetAuthToken(t.AccessToken).
 		SetBasicAuth(ci.Username, ci.Password).
 		SetBody(thing).
 		Post("https://" + ci.Authority + thing.Path())
@@ -95,7 +109,12 @@ func PostThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, shoul
 
 // DeleteThingToResource - Use the Things Path function to build a DELETE REST request
 func DeleteThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, shouldCommit bool) (err error) {
+	t, err := GetToken(rc, ci)
+	if err != nil {
+		return err
+	}
 	resp, err := rc.R().
+		SetAuthToken(t.AccessToken).
 		SetBasicAuth(ci.Username, ci.Password).
 		Delete("https://" + ci.Authority + thing.Path())
 	if err != nil {
@@ -117,4 +136,33 @@ func DeleteThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, sho
 		}
 	}
 	return
+}
+
+type Token struct {
+	AccessToken string `json:"accessToken"`
+	// FirstLogin          bool   `json:"firstLogin"`
+	// RefreshToken        string `json:"refreshToken"`
+	// RefreshTokenExpires int    `json:"refreshTokenExpires"`
+	// TokenExpires        int    `json:"tokenExpires"`
+}
+
+// GetToken added for HB 3.0
+func GetToken(rc *resty.Client, ci ConnectionInfo) (t *Token, err error) {
+	r, err := rc.R().
+		SetBody(`{"userName":"`+ci.Username+`", "password":"`+ci.Password+`"}`).
+		SetHeader("Content-Type", "application/json").
+		Post("https://" + ci.Authority + "/api/v1/login")
+
+	if err != nil {
+		return nil, fmt.Errorf("problem with authenticating to healthbot: %w", err)
+	}
+
+	var token Token
+	err = json.Unmarshal(r.Body(), &token)
+	if err != nil {
+		return nil, fmt.Errorf("could not unmarshall authentication json response: %w", err)
+	}
+
+	// set token for future requests against this server
+	return &token, err
 }

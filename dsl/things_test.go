@@ -146,6 +146,9 @@ func TestExtractThingFromResource(t *testing.T) {
 	httpmock.ActivateNonDefault(client.GetClient())
 	defer httpmock.DeactivateAndReset()
 
+	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/login",
+		httpmock.NewStringResponder(200, `{"accessToken": "aaa-some-token-aaa"}`))
+
 	httpmock.RegisterResponder("GET", "https://localhost:8080/api/v1/devices/",
 		func(req *http.Request) (*http.Response, error) {
 			resp, err := httpmock.NewJsonResponse(200, Devices{})
@@ -160,7 +163,7 @@ func TestExtractThingFromResource(t *testing.T) {
 	err := ExtractThingFromResource(client, &thing, ci)
 	assert.Nil(t, err, "response from ExtractThingFromResource should be valid")
 
-	assert.True(t, httpmock.GetTotalCallCount() == 1, "Expected Single call to Resource")
+	assert.True(t, httpmock.GetTotalCallCount() == 2, "Expected Single call to Resource")
 
 	_, isPresent := httpmock.GetCallCountInfo()["GET https://localhost:8080/api/v1/devices/"]
 	assert.True(t, isPresent, "Should contain a correctly formatted GET")
@@ -199,6 +202,9 @@ func TestPostThingToResource(t *testing.T) {
 	// Get the underlying HTTP Client and set it to Mock
 	httpmock.ActivateNonDefault(client.GetClient())
 	defer httpmock.DeactivateAndReset()
+
+	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/login",
+		httpmock.NewStringResponder(200, `{"accessToken": "aaa-some-token-aaa"}`))
 
 	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/devices/",
 		httpmock.NewStringResponder(200, ``))
@@ -245,6 +251,9 @@ func TestDeleteThingToResource(t *testing.T) {
 	// Get the underlying HTTP Client and set it to Mock
 	httpmock.ActivateNonDefault(client.GetClient())
 	defer httpmock.DeactivateAndReset()
+
+	httpmock.RegisterResponder("POST", "https://localhost:8080/api/v1/login",
+		httpmock.NewStringResponder(200, `{"accessToken": "aaa-some-token-aaa"}`))
 
 	httpmock.RegisterResponder("DELETE", "https://localhost:8080/api/v1/device/test-device/",
 		httpmock.NewStringResponder(204, ``))
