@@ -15,7 +15,7 @@ var transformCmd = &cobra.Command{
 
 Transform sub-commands work by iterating over all files in the input directory`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if cmd.Flag("verbose").Value.String() == "true" {
+		if cmd.Flag("verbose").Value.String() == TRUE {
 			logLevel = hclog.Debug
 		}
 	},

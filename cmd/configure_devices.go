@@ -14,12 +14,11 @@ import (
 
 var verbose string
 
-func sendRPC(d dsl.Device, b []byte) (err error) {
-
+func sendRPC(d *dsl.Device, b []byte) (err error) {
 	sshConfig := &ssh.ClientConfig{
 		User:            *d.Password.Username,
 		Auth:            []ssh.AuthMethod{ssh.Password(*d.Password.Password)},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(), // nolint:gosec
 	}
 
 	port := 830
@@ -58,7 +57,7 @@ func applyNetconfRPC(devicesFiles []string, rpcFilename string) (err error) {
 			return
 		}
 		for _, d := range devices.Device {
-			rpcError := sendRPC(d, rpcFile)
+			rpcError := sendRPC(&d, rpcFile) // nolint:scopelint
 			if rpcError != nil {
 				fmt.Fprintf(os.Stdout, "Problem with Device %v: %v", d.DeviceID, rpcError)
 				// do not error out, could be device is gone, continue trying others

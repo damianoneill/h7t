@@ -1,6 +1,6 @@
 module github.com/damianoneill/h7t
 
-go 1.13
+go 1.14
 
 require (
 	github.com/damianoneill/net v0.1.2

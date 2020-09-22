@@ -13,7 +13,7 @@ import (
 // WriteThingsToFile - common function used by commands creating yaml things
 func WriteThingsToFile(thing dsl.Thing, namedfile string) (err error) {
 	if thing.Count() == 0 {
-		return errors.New("Zero Things, not writing to file")
+		return errors.New("zero Things, not writing to file")
 	}
 	f, err := AppFs.Create(namedfile)
 	if err != nil {

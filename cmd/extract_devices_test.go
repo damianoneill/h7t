@@ -11,7 +11,6 @@ import (
 )
 
 func TestWriteDevicesToFile(t *testing.T) {
-
 	AppFs = afero.NewMemMapFs()
 
 	type args struct {
@@ -37,7 +36,7 @@ func TestWriteDevicesToFile(t *testing.T) {
 			name: "Valid devices should produce an file",
 			args: args{
 				thing: &dsl.Devices{
-					Device: []dsl.Device{dsl.Device{
+					Device: []dsl.Device{{
 						DeviceID: "mx1",
 						Host:     "10.0.0.1",
 					}},
@@ -70,7 +69,6 @@ func TestWriteDevicesToFile(t *testing.T) {
 				assert.Nil(t, existErr, "Call to exist should not return an error")
 				assert.True(t, exists, "File should exist")
 			}
-
 		})
 	}
 }

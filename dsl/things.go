@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"net/http"
 
 	"gopkg.in/resty.v1"
 	"gopkg.in/yaml.v2"
@@ -75,7 +76,7 @@ func PostThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, shoul
 		return
 	}
 	switch resp.StatusCode() {
-	case 200:
+	case http.StatusOK:
 		break
 	default:
 		return errors.New("Problem updating Thing: %v " + resp.String())
@@ -101,7 +102,7 @@ func DeleteThingToResource(rc *resty.Client, thing Thing, ci ConnectionInfo, sho
 		return
 	}
 	switch resp.StatusCode() {
-	case 204:
+	case http.StatusNoContent:
 		break
 	default:
 		return errors.New("Problem deleting Thing: %v " + resp.String())

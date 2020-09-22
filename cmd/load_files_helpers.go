@@ -3,6 +3,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -21,7 +22,7 @@ func DeleteFileToResource(rc *resty.Client, filename, path string, ci dsl.Connec
 		return
 	}
 	switch resp.StatusCode() {
-	case 204:
+	case http.StatusNoContent:
 		break
 	default:
 		return errors.New("Problem deleting File: %v " + resp.String())
@@ -45,7 +46,7 @@ func PostFileToResource(rc *resty.Client, filename, path, paramName string, ci d
 		return
 	}
 	switch resp.StatusCode() {
-	case 200:
+	case http.StatusOK:
 		break
 	default:
 		return errors.New("Problem uploading File: %v " + resp.String())
@@ -77,13 +78,14 @@ This will exclude any playbook and rule files in the input directory.`,
 		for _, filename := range files {
 			// ignore playbook and rule files
 			if !strings.HasSuffix(filename, ".playbook") && !strings.HasSuffix(filename, ".rule") {
-				if cmd.Flag("erase").Value.String() == "true" {
+				if cmd.Flag("erase").Value.String() == TRUE {
 					err = DeleteFileToResource(resty.DefaultClient, filename, "/api/v1/files/helper-files/"+filepath.Base(filename)+"/", ci)
 					if err != nil {
 						return
 					}
 				} else {
-					err = PostFileToResource(resty.DefaultClient, filename, "/api/v1/files/helper-files/"+filepath.Base(filename)+"/", "up_file", ci, false)
+					err = PostFileToResource(resty.DefaultClient,
+						filename, "/api/v1/files/helper-files/"+filepath.Base(filename)+"/", "up_file", ci, false)
 					if err != nil {
 						return
 					}

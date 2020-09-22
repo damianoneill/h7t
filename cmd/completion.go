@@ -47,7 +47,7 @@ func Completion(cmd *cobra.Command, args []string) {
 	completion(err, args...)
 }
 
-func completion(err error, args ...string) {
+func completion(err error, _ ...string) {
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -58,7 +58,11 @@ func completion(err error, args ...string) {
 func init() {
 	rootCmd.AddCommand(completionCmd)
 
-	completionCmd.PersistentFlags().StringVarP(&completionTarget, "completionfile", "", "/etc/bash_completion.d/"+rootCmd.Use+".sh", "completion file")
+	completionCmd.PersistentFlags().StringVarP(&completionTarget,
+		"completionfile",
+		"",
+		"/etc/bash_completion.d/"+rootCmd.Use+".sh",
+		"completion file")
 	// Required for bash-completion
-	_ = completionCmd.PersistentFlags().SetAnnotation("completionfile", cobra.BashCompFilenameExt, []string{}) // nolint : gosec
+	_ = completionCmd.PersistentFlags().SetAnnotation("completionfile", cobra.BashCompFilenameExt, []string{})
 }

@@ -46,17 +46,18 @@ func (f FakeReadFiler) ReadFile(filename string) ([]byte, error) {
 // to load and store your data
 func HelperLoadBytes(tb testing.TB, name string) []byte {
 	path := filepath.Join("testdata", name) // relative path
-	bytes, err := ioutil.ReadFile(path)     // nolint : gosec
+	b, err := ioutil.ReadFile(path)
 	if err != nil {
 		tb.Fatal(err)
 	}
-	return bytes
+	return b
 }
 
 func TestCsvMarshalUnMarshal(t *testing.T) {
 	b, err := csvutil.Marshal(fakeDevices.Device)
 	assert.Nil(t, err, "Failed to marshal csv representation of Devices")
-	assert.Equal(t, "device-id,host,username,password\ntest-device,10.0.0.1,,\n", string(b), "Should only contain device id, host, uname and password")
+	assert.Equal(t, "device-id,host,username,password\ntest-device,10.0.0.1,,\n",
+		string(b), "Should only contain device id, host, uname and password")
 	var d []Device
 	err = csvutil.Unmarshal([]byte("device-id,host,username,password\ntest-device,10.0.0.1,,\n"), &d)
 	assert.Nil(t, err, "Failed to unmarshal csv representation of Devices")
@@ -67,7 +68,6 @@ func TestCsvMarshalUnMarshal(t *testing.T) {
 	w := &bytes.Buffer{}
 	_ = WriteThingToFile(&fakeDevices, w)
 	assert.NotContains(t, w.String(), "password", "should not contain password")
-
 }
 
 func TestUnmarshalFailure(t *testing.T) {
@@ -142,7 +142,6 @@ func TestWriteThingToFile(t *testing.T) {
 }
 
 func TestExtractThingFromResource(t *testing.T) {
-
 	// Get the underlying HTTP Client and set it to Mock
 	httpmock.ActivateNonDefault(client.GetClient())
 	defer httpmock.DeactivateAndReset()
@@ -165,7 +164,6 @@ func TestExtractThingFromResource(t *testing.T) {
 
 	_, isPresent := httpmock.GetCallCountInfo()["GET https://localhost:8080/api/v1/devices/"]
 	assert.True(t, isPresent, "Should contain a correctly formatted GET")
-
 }
 
 func TestReadThingFromFile(t *testing.T) {
@@ -198,7 +196,6 @@ func TestReadThingFromFile(t *testing.T) {
 }
 
 func TestPostThingToResource(t *testing.T) {
-
 	// Get the underlying HTTP Client and set it to Mock
 	httpmock.ActivateNonDefault(client.GetClient())
 	defer httpmock.DeactivateAndReset()
@@ -245,7 +242,6 @@ func TestPostThingToResource(t *testing.T) {
 }
 
 func TestDeleteThingToResource(t *testing.T) {
-
 	// Get the underlying HTTP Client and set it to Mock
 	httpmock.ActivateNonDefault(client.GetClient())
 	defer httpmock.DeactivateAndReset()

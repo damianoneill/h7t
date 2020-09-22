@@ -33,6 +33,9 @@ var filePathSeperator = string(filepath.Separator)
 // AppFs - defined for testing
 var AppFs = afero.NewOsFs()
 
+// TRUE used for boolean comparisons
+const TRUE = "true"
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "h7t",
@@ -41,7 +44,7 @@ var rootCmd = &cobra.Command{
 	
 The intent with this tool is to provide bulk or aggregate functions, that simplify interacting with Healthbot.`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if cmd.Flag("verbose").Value.String() == "true" {
+		if cmd.Flag("verbose").Value.String() == TRUE {
 			resty.SetDebug(true) // will show rest calls
 		}
 		ci = dsl.ConnectionInfo{
@@ -49,8 +52,8 @@ The intent with this tool is to provide bulk or aggregate functions, that simpli
 			Username:  viper.GetString("username"),
 			Password:  viper.GetString("password"),
 		}
-		//setup resty
-		resty.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
+		// setup resty
+		resty.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true}) // nolint:gosec
 		viper.Set("restclient.RedirectPolicy", "always")
 	},
 	SilenceUsage:  true,
@@ -84,7 +87,6 @@ func init() {
 	_ = viper.BindPFlag("password", rootCmd.PersistentFlags().Lookup("password"))
 
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "cause "+rootCmd.Use+" to be more verbose")
-
 }
 
 // initConfig reads in config file and ENV variables if set.

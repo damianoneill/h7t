@@ -12,13 +12,13 @@ import (
 	"gopkg.in/resty.v1"
 )
 
-// summariseInstallationCmd represents the installation command
-var summariseInstallationCmd = &cobra.Command{
+// summarizeInstallationCmd represents the installation command
+var summarizeInstallationCmd = &cobra.Command{
 	Use:   "installation",
-	Short: "Summarise information collected from a Healthbot installation",
+	Short: "Summarize information collected from a Healthbot installation",
 	Long:  `Generates counts from different Healthbot dsl things for e.g. Devices, Device Groups etc.`,
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
-		return summariseInstallation(ci)
+		return summarizeInstallation(ci)
 	},
 }
 
@@ -72,8 +72,8 @@ func renderDeviceTable(w io.Writer, df dsl.DeviceFacts) {
 	table := NewTable(w)
 	table.SetHeader([]string{"Device Id", "Platform", "Release", "Serial Number"})
 	table.Append([]string{"", "", "", ""})
-	for _, fact := range df {
-		table.Append([]string{fact.DeviceID, fact.Facts.Platform, fact.Facts.Release, fact.Facts.SerialNumber})
+	for i := range df {
+		table.Append([]string{df[i].DeviceID, df[i].Facts.Platform, df[i].Facts.Release, df[i].Facts.SerialNumber})
 	}
 	table.Render() // Send output
 }
@@ -91,8 +91,7 @@ func renderDeviceGroups(w io.Writer, dg dsl.DeviceGroups) {
 	table.Render() // Send output
 }
 
-func summariseInstallation(ci dsl.ConnectionInfo) (err error) {
-
+func summarizeInstallation(ci dsl.ConnectionInfo) (err error) {
 	err = collectSystemDetails(resty.DefaultClient, ci, os.Stdout)
 	if err != nil {
 		return
@@ -118,5 +117,5 @@ func summariseInstallation(ci dsl.ConnectionInfo) (err error) {
 }
 
 func init() {
-	summariseCmd.AddCommand(summariseInstallationCmd)
+	summarizeCmd.AddCommand(summarizeInstallationCmd)
 }

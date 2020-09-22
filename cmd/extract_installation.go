@@ -32,7 +32,7 @@ func appendResourceBody(backup *[]byte, responseBody []byte) (err error) {
 	return
 }
 
-func createHelper(rc *resty.Client, resource string, filename string) (err error) {
+func createHelper(rc *resty.Client, resource, filename string) (err error) {
 	resp, restErr := rc.R().
 		SetBasicAuth(ci.Username, ci.Password).
 		Get("https://" + ci.Authority + resource)
@@ -87,7 +87,7 @@ func createBackup(rc *resty.Client, resources []string, filename string) (err er
 		return
 	}
 	fmt.Fprintf(os.Stdout, "Extracted config to %v\n", filename)
-	return
+	return err
 }
 
 // extractInstallationCmd represents the extract installation command
@@ -112,13 +112,17 @@ var extractInstallationCmd = &cobra.Command{
 		}
 
 		t := time.Now()
-		err = createBackup(resty.DefaultClient, jsonResources, cmd.Flag("output_directory").Value.String()+filePathSeperator+"healthbot_backup-"+t.Format("20060102150405")+".json")
+		err = createBackup(resty.DefaultClient,
+			jsonResources,
+			cmd.Flag("output_directory").Value.String()+filePathSeperator+"healthbot_backup-"+t.Format("20060102150405")+".json")
 		if err != nil {
 			return
 		}
 
 		// TODO Helper Files
-		err = createHelper(resty.DefaultClient, "/api/v1/files/helper-files/backup", cmd.Flag("output_directory").Value.String()+filePathSeperator+"healthbot_helpers-"+t.Format("20060102150405")+".tar.gz")
+		err = createHelper(resty.DefaultClient,
+			"/api/v1/files/helper-files/backup",
+			cmd.Flag("output_directory").Value.String()+filePathSeperator+"healthbot_helpers-"+t.Format("20060102150405")+".tar.gz")
 		return
 	},
 }

@@ -11,7 +11,6 @@ import (
 )
 
 func TestPostHelperFileToResource(t *testing.T) {
-
 	AppFs = afero.NewMemMapFs()
 	matchFile := "something/anyfile.txt"
 
@@ -57,7 +56,12 @@ func TestPostHelperFileToResource(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := PostFileToResource(tt.args.rc, tt.args.filename, tt.args.path, tt.args.paramName, tt.args.ci, tt.args.shouldCommit); (err != nil) != tt.wantErr {
+			if err := PostFileToResource(tt.args.rc,
+				tt.args.filename,
+				tt.args.path,
+				tt.args.paramName,
+				tt.args.ci,
+				tt.args.shouldCommit); (err != nil) != tt.wantErr {
 				t.Errorf("PostHelperFileToResource() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

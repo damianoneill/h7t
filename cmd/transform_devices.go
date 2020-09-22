@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 
@@ -41,7 +40,7 @@ var tranformDevicesCmd = &cobra.Command{
 func transformDevices(inputDirectory, outputDirectory, p string, args []string) (err error) {
 	fmt.Fprintf(os.Stdout, "Plugin: %v \n", p)
 
-	/// Generic Plugin Code
+	// Generic Plugin Code
 
 	// Create an hclog.Logger
 	logger := hclog.New(&hclog.LoggerOptions{
@@ -60,12 +59,12 @@ func transformDevices(inputDirectory, outputDirectory, p string, args []string) 
 	// Connect via RPC
 	rpcClient, err := client.Client()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	// Request the plugin
 	raw, err := rpcClient.Dispense("transformer")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	transformer := raw.(plugins.Transformer)
 	devices, err := transformer.Devices(plugins.Arguments{
@@ -73,7 +72,7 @@ func transformDevices(inputDirectory, outputDirectory, p string, args []string) 
 		CmdLineArgs:    args,
 	})
 
-	/// End of Generic Plugin code
+	// End of Generic Plugin code
 
 	if err != nil {
 		fmt.Fprintf(os.Stdout, "Error: %v \n", err)

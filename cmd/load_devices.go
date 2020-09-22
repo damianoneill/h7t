@@ -35,7 +35,7 @@ func loadThings(thing dsl.Thing, files []string, shouldErase string) (err error)
 		if err != nil {
 			return
 		}
-		if shouldErase == "true" {
+		if shouldErase == TRUE {
 			for _, t := range thing.InnerThings() {
 				err = dsl.DeleteThingToResource(resty.DefaultClient, t, ci, true)
 				if err != nil {

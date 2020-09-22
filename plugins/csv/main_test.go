@@ -21,7 +21,6 @@ func (f FakeReadFiler) ReadFile(filename string) ([]byte, error) {
 }
 
 func TestReadCsvFile(t *testing.T) {
-
 	fake := FakeReadFiler{Str: "device-id,host,username,password\nmx1,10.0.0.1,,"}
 
 	type args struct {
@@ -37,7 +36,7 @@ func TestReadCsvFile(t *testing.T) {
 		{
 			name:        "Test csv parsed correctly from file",
 			args:        args{filename: "filename", readfile: fake.ReadFile},
-			wantDevices: []dsl.Device{dsl.Device{DeviceID: "mx1", Host: "10.0.0.1"}},
+			wantDevices: []dsl.Device{{DeviceID: "mx1", Host: "10.0.0.1"}},
 			wantErr:     false,
 		},
 	}

@@ -1,13 +1,14 @@
+env:
+  - CGO_ENABLED=0
 before:
   hooks:
-    # you may remove this if you don't use vgo
-    - go mod tidy
-    - go fmt ./...
+    - make test
 builds:
   - id: "h7t"
     main: ./main.go
-    env:
-      - CGO_ENABLED=0
+    binary: h7t
+    ldflags:
+     - -s -w -X github.com/damianoneill/h7t/cmd.version={{.Version}} -X github.com/damianoneill/h7t/cmd.commit={{.Commit}} -X github.com/damianoneill/h7t/cmd.date={{.Date}}
     goos:
       - linux
       - darwin
@@ -16,7 +17,7 @@ builds:
       - amd64
   - id: "plugin-csv"
     main: ./plugins/csv/main.go
-    binary: /plugins/csv/transformer
+    binary: transformer
     env:
       - CGO_ENABLED=0
     goos:
@@ -25,12 +26,16 @@ builds:
       - windows
     goarch:
       - amd64
+dockers:
+ - binaries:
+     - h7t
+     - transformer
+   image_templates:
+     - "github.com/damianoneill/h7t:latest"
+     - "github.com/damianoneill/h7t:{{ .Tag }}"
+   dockerfile: Dockerfile
 archives:
   - replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: i386
       amd64: x86_64
 checksum:
   name_template: "checksums.txt"

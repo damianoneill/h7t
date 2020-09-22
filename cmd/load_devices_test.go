@@ -7,11 +7,10 @@ import (
 	"github.com/spf13/afero"
 )
 
+const matchFile = "something/anyfile.txt"
+
 func Test_getDirectoryContents(t *testing.T) {
-
 	AppFs = afero.NewMemMapFs()
-
-	matchFile := "something/anyfile.txt"
 
 	_ = AppFs.Mkdir("nothing", 0777)
 	_ = AppFs.Mkdir("something", 0777)
