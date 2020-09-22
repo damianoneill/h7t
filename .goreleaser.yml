@@ -31,8 +31,8 @@ dockers:
      - h7t
      - transformer
    image_templates:
-     - "docker.pkg.github.com/damianoneill/h7t:latest"
-     - "docker.pkg.github.com/damianoneill/h7t:{{ .Tag }}"
+     - "docker.pkg.github.com/damianoneill/h7t/cli:latest"
+     - "docker.pkg.github.com/damianoneill/h7t/cli:{{ .Tag }}"
    dockerfile: Dockerfile
 archives:
   - replacements:
