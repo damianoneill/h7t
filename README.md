@@ -1,6 +1,6 @@
 # h~~ealthbot~~<sup>7</sup>t
 
-![Docker Release](https://img.shields.io/docker/v/damianoneill/h7t?label=Docker%20Release&link=https://hub.docker.com/r/damianoneill/h7t)
+[![Docker Release](https://img.shields.io/docker/v/damianoneill/h7t?label=Docker%20Release)](https://hub.docker.com/r/damianoneill/h7t)
 [![Go Report Card](https://goreportcard.com/badge/damianoneill/h7t)](http://goreportcard.com/report/damianoneill/h7t)
 [![license](https://img.shields.io/github/license/damianoneill/h7t.svg)](https://github.com/damianoneill/h7t/blob/master/LICENSE)
 
