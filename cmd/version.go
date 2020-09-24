@@ -8,18 +8,24 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// versionCmd represents the version command
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Output the current build information",
 	Long:  "Version, Commit and Date will be output from the Build Info.",
 	Run: func(cmd *cobra.Command, args []string) {
-		version(os.Stdout, bi)
+		Version(os.Stdout)
 	},
 }
 
-func version(w io.Writer, bi buildInfo) {
-	fmt.Fprintf(w, "%v, commit %v, built at %v \n", bi.version, bi.commit, bi.date)
+// Version outputs a formatted version message to the passed writer.
+func Version(w io.Writer) {
+	fmt.Fprintf(w, "%v, commit %v, built at %v \n", version, commit, date)
 }
 
 func init() {

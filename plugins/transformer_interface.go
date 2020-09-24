@@ -3,7 +3,7 @@ package plugins
 import (
 	"net/rpc"
 
-	"github.com/damianoneill/h7t/dsl"
+	"github.com/damianoneill/h7t/pkg/dsl"
 	"github.com/hashicorp/go-plugin"
 )
 

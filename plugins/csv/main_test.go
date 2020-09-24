@@ -7,7 +7,7 @@ import (
 
 	"github.com/tj/assert"
 
-	"github.com/damianoneill/h7t/dsl"
+	"github.com/damianoneill/h7t/pkg/dsl"
 )
 
 type FakeReadFiler struct {

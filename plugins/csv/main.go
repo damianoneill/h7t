@@ -7,7 +7,7 @@ import (
 
 	"github.com/jszwec/csvutil"
 
-	"github.com/damianoneill/h7t/dsl"
+	"github.com/damianoneill/h7t/pkg/dsl"
 	"github.com/damianoneill/h7t/plugins"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"

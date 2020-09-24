@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/damianoneill/h7t/dsl"
+	"github.com/damianoneill/h7t/pkg/dsl"
 	"github.com/jarcoal/httpmock"
 	"github.com/tj/assert"
 	"gopkg.in/resty.v1"

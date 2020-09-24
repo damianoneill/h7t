@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/damianoneill/h7t/dsl"
+	"github.com/damianoneill/h7t/pkg/dsl"
 
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"

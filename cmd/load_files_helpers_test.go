@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/damianoneill/h7t/dsl"
+	"github.com/damianoneill/h7t/pkg/dsl"
 	"github.com/jarcoal/httpmock"
 	"github.com/spf13/afero"
 	"gopkg.in/resty.v1"
