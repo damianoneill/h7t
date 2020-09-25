@@ -49,10 +49,10 @@ The tool includes a plugin based solution for transforming customer data into a 
 
 An image is maintained on Docker Hub.
 
-It can be pulled as follows:
+It can be pulled as follows, consider using a versioned release rather than latest:
 
 ```console
-docker pull damianoneill/h7t:v1.3.0
+docker pull damianoneill/h7t:latest
 ```
 
 And as an example, run the configure devices, with a sample.rpc in your current directory, as follows: 
