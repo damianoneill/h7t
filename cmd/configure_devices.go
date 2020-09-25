@@ -79,21 +79,16 @@ E.g.
 $ cat sample.rpc 
 <edit-config>
   <target>
-    <running/>
+    <candidate />
   </target>
   <config>
-    <system>
-      <services>
-        <extension-service>
-          <request-response>
-            <grpc>
-              <clear-text/>
-              <skip-authentication/>
-            </grpc>
-          </request-response>
-        </extension-service>
-      </services>
-    </system>
+    <configuration>
+      <system>
+        <login>
+          <message>Login Message...</message>
+        </login>
+      </system>
+    </configuration>
   </config>
 </edit-config>
 `,
