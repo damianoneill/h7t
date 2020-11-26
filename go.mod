@@ -21,5 +21,5 @@ require (
 	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b
 	gopkg.in/resty.v1 v1.12.0
-	gopkg.in/yaml.v2 v2.3.0
+	gopkg.in/yaml.v2 v2.4.0
 )
