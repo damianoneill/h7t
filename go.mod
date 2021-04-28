@@ -6,7 +6,7 @@ require (
 	github.com/damianoneill/net v0.1.2
 	github.com/golangci/golangci-lint v1.30.0
 	github.com/goreleaser/goreleaser v0.143.0
-	github.com/hashicorp/go-hclog v0.14.1
+	github.com/hashicorp/go-hclog v0.16.0
 	github.com/hashicorp/go-plugin v1.3.0
 	github.com/jarcoal/httpmock v1.0.6
 	github.com/jszwec/csvutil v1.4.0
