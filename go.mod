@@ -9,7 +9,7 @@ require (
 	github.com/hashicorp/go-hclog v0.15.0
 	github.com/hashicorp/go-plugin v1.4.2
 	github.com/jarcoal/httpmock v1.0.6
-	github.com/jszwec/csvutil v1.4.0
+	github.com/jszwec/csvutil v1.6.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/satori/go.uuid v1.2.0 // indirect
