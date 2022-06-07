@@ -16,7 +16,7 @@ require (
 	github.com/spf13/afero v1.4.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.1
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.2
 	github.com/tj/assert v0.0.3
 	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b
