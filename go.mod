@@ -6,7 +6,7 @@ require (
 	github.com/damianoneill/net v0.1.2
 	github.com/golangci/golangci-lint v1.30.0
 	github.com/goreleaser/goreleaser v0.143.0
-	github.com/hashicorp/go-hclog v0.15.0
+	github.com/hashicorp/go-hclog v1.2.1
 	github.com/hashicorp/go-plugin v1.4.2
 	github.com/jarcoal/httpmock v1.0.6
 	github.com/jszwec/csvutil v1.4.0
@@ -16,7 +16,7 @@ require (
 	github.com/spf13/afero v1.4.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.1
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.2
 	github.com/tj/assert v0.0.3
 	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b
